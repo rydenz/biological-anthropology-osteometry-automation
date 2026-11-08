@@ -1,6 +1,6 @@
 # Biological Anthropology - Osteometry Automation
 
-A local, browser-based prototype for biological anthropology osteometry automation, currently focused on osteometric sex estimation. Current implementation covers the femur with Bass, Spradley, and Kanz methods, plus an automated femur summary.
+A local, browser-based prototype for biological anthropology osteometry automation, currently focused on osteometric sex estimation. The Femur section implements Bass, Spradley, and Kanz methods, plus an automated femur summary. The Mandible section is a separate specimen-management prototype; measurement protocols and calculations have not yet been defined.
 
 ## Run locally
 
@@ -8,12 +8,14 @@ Open `index.html` in a desktop browser. No build step, server, npm dependencies,
 
 ## Current behavior
 
-- Site and Tomb / Context selection, with context-specific specimen records.
+- Site and Context selection, with context-specific specimen records.
+- Skeletal-element sidebar to switch between Femur and Mandible.
+- Mandible identity and specimen records stored independently from Femur, ready for future method definitions.
 - Shared specimen identity and measurement values between method tabs.
 - Kanz model selection and a dynamic measurement requirement matrix.
 - Automatically populated Femur summary table.
 - Dark-mode UI.
-- Local browser storage and JSON backup / restore.
+- Local browser storage and JSON backup / restore (including Mandible records).
 
 ## Research-data and validation notes
 
