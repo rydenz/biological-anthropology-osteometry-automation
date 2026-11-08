@@ -681,8 +681,8 @@
     toast(storageFailure?'Context created for this session, but browser storage is blocked. Use Backup all before closing.':'Context '+name+' created under '+(currentSite()?.code||'site')+'.',storageFailure);
   });
   $('backupWorkspace').addEventListener('click',()=>{
-    persistWorkspace();
-    const backup={type:'femur-sex-estimation-backup',version:1,exportedAt:new Date().toISOString(),workspace:workspaceData,referenceImages:images};
+    persistWorkspace();persistMandible();
+    const backup={type:'femur-sex-estimation-backup',version:2,exportedAt:new Date().toISOString(),workspace:workspaceData,mandible:mandibleData,referenceImages:images};
     const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
     const url=URL.createObjectURL(blob);const a=document.createElement('a');
     a.href=url;a.download='sex_estimation_all_sites_backup.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
@@ -696,6 +696,9 @@
       if(payload.type!=='femur-sex-estimation-backup'||!w||!Array.isArray(w.sites)||!Array.isArray(w.contexts)||!w.sites.length||!w.contexts.length||!w.recordsByContext||typeof w.recordsByContext!=='object'||!w.contexts.some(c=>c.id===w.activeContextId)||w.contexts.some(c=>!w.sites.some(s=>s.id===c.siteId))){throw Error('Not a valid workspace backup.');}
       if(!confirm('Restore this backup and REPLACE all locally stored sites, contexts and specimens? Save a current backup first if needed.'))return;
       workspaceData=w;activeContextId=w.activeContextId;
+      if(payload.mandible && typeof payload.mandible.recordsByContext==='object' && typeof payload.mandible.draftsByContext==='object'){
+        mandibleData=payload.mandible;put(MANDIBLE_KEY,mandibleData);
+      }
       saved=(w.recordsByContext[activeContextId]||[]).map(r=>({...norm(r),id:r.id||uid()}));
       state=norm(w.draftsByContext?.[activeContextId]);
       selectedId=null;
