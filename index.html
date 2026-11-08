@@ -133,10 +133,42 @@
 .context-create-item .close{margin-left:auto}
 .context-create-item .dialog-error:not(:empty){padding:8px 11px;background:#3c2429;color:#ffc7ca;border-radius:8px}
 @media(max-width:510px){.context-create-item{flex:1 1 auto}.context-create-item[open]{flex-basis:100%}}
+
+/* Skeletal element navigation: each element has its own working area. */
+.skeletal-layout{max-width:1510px;display:grid;grid-template-columns:194px minmax(0,1fr);align-items:start;gap:24px;padding-top:18px}
+.skeletal-sidebar{position:sticky;top:18px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:13px;min-width:0}
+.skeletal-sidebar-title{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);font-weight:750;margin:4px 8px 12px}
+.skeletal-nav{display:flex;flex-direction:column;gap:5px}
+.skeletal-nav-button{background:transparent;border:1px solid transparent;color:var(--secondary);padding:12px 11px;border-radius:10px;width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left;font-size:13px;font-weight:670}
+.skeletal-nav-button:hover{background:#252c36;color:var(--ink)}
+.skeletal-nav-button.active{background:#21354d;border-color:#3b5876;color:#e9f2ff}
+.skeletal-nav-indicator{width:7px;height:7px;border-radius:50%;background:#6d788a;flex-shrink:0}
+.skeletal-nav-button.active .skeletal-nav-indicator{background:#93b9f6}
+.skeletal-content,.mandible-view{min-width:0}
+.skeletal-content .pagehead,.mandible-view .pagehead{padding-top:9px}
+.skeletal-content .tabs-outer{margin-left:0;margin-right:0}
+.mandible-view .card{padding:22px}
+.mandible-view .person-grid{margin-top:17px}
+.mandible-intro{margin-bottom:18px}
+.mandible-spaced{display:grid;gap:18px}
+.mandible-actions{display:flex;gap:9px;flex-wrap:wrap}
+.mandible-note{padding:18px;background:var(--panel-2);border:1px dashed #455166;border-radius:11px;color:var(--secondary);font-size:12px;line-height:1.65}
+.mandible-note strong{display:block;color:var(--ink);font-size:13px;margin-bottom:5px}
+.mandible-table{width:100%;border-collapse:collapse;margin-top:17px}
+.mandible-table th{text-align:left;font-size:11px;color:var(--muted);font-weight:730;letter-spacing:.3px;padding:10px;border-bottom:1px solid var(--line)}
+.mandible-table td{padding:11px 10px;border-bottom:1px solid var(--line-soft);font-size:12px;overflow-wrap:anywhere}
+.mandible-table tr:last-child td{border-bottom:none}
+.mandible-table .selected{background:#263347}
+.mandible-table-actions{display:flex;gap:6px;flex-wrap:wrap}
+.mandible-empty{color:var(--muted);font-size:12px;padding:22px 6px 3px}
+.mandible-status{font-size:11px;color:var(--secondary);margin-top:11px}
+@media(max-width:1100px){.skeletal-layout{grid-template-columns:160px minmax(0,1fr);gap:14px}}
+@media(max-width:830px){.skeletal-layout{display:block}.skeletal-sidebar{position:static;margin-bottom:10px}.skeletal-sidebar-title{margin-bottom:8px}.skeletal-nav{flex-direction:row}.skeletal-nav-button{width:auto;min-width:115px}.skeletal-content .pagehead,.mandible-view .pagehead{padding-top:19px}.mandible-view .person-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:530px){.mandible-view .person-grid{grid-template-columns:1fr}.skeletal-nav-button{flex:1}.mandible-view .card{padding:16px}}
 </style>
 </head>
 <body>
-<header class="topbar"><div class="wrap toprow"><div class="brand"><div class="symbol" aria-hidden="true">F</div><div><div class="brandstrong">Sex Estimation</div><div class="brandsub"><span class="brand-meta-label">Site</span><span id="workspaceSiteName">RMIL</span><span class="brand-meta-separator" aria-hidden="true">/</span><span class="brand-meta-label">Context</span><span id="workspaceContextName">Tomb 3</span></div></div></div><span class="pill">LOCAL PROTOTYPE · SOURCE FORMULAS</span></div></header>
+<header class="topbar"><div class="wrap toprow"><div class="brand"><div class="symbol" aria-hidden="true">F</div><div><div class="brandstrong">Sex Estimation</div><div class="brandsub"><span class="brand-meta-label">Site</span><span id="workspaceSiteName">RMIL</span><span class="brand-meta-separator" aria-hidden="true">/</span><span class="brand-meta-label">Context</span><span id="workspaceContextName">Tomb 3</span></div></div></div></div></header>
 <section class="context-bar wrap" aria-label="Site and excavation context">
   <div class="context-field"><label for="siteSelect">Site</label><select id="siteSelect" aria-label="Select archaeological site"></select></div>
   <div class="context-field"><label for="contextSelect">Context</label><select id="contextSelect" aria-label="Select tomb or excavation context"></select></div>
@@ -160,16 +192,48 @@
   <div class="context-end"><span id="contextCount" class="context-count">0 specimens</span><button class="button mini tertiary" id="backupWorkspace" type="button" title="Download a local backup of all sites and contexts">Backup all</button><label class="button mini tertiary file-import" for="restoreWorkspace" title="Restore a saved workspace backup">Restore<input id="restoreWorkspace" type="file" accept="application/json,.json" hidden></label></div>
 </section>
 
-<div class="wrap pagehead"><div class="kicker">Morphometric analysis</div><h1 id="pageTitle">Femur · Bass</h1></div>
-<div class="tabs-outer"><nav class="tabs wrap" id="tabs" aria-label="Femur analysis methods" role="tablist"><button class="tab active" role="tab" aria-selected="true" data-tab="bass" id="tab-bass">Bass</button><button class="tab" role="tab" aria-selected="false" data-tab="spradley" id="tab-spradley">Spradley</button><button class="tab" role="tab" aria-selected="false" data-tab="kanz" id="tab-kanz">Kanz</button><button class="tab" role="tab" aria-selected="false" data-tab="overview" id="tab-overview">Femur <span class="tab-count">Summary</span></button></nav></div>
-<main class="wrap">
+<div class="skeletal-layout wrap">
+<aside class="skeletal-sidebar" aria-label="Skeletal elements">
+  <div class="skeletal-sidebar-title">Skeletal elements</div>
+  <nav class="skeletal-nav" aria-label="Choose skeletal element">
+    <button class="skeletal-nav-button active" id="elementFemur" type="button" aria-current="page"><span>Femur</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+    <button class="skeletal-nav-button" id="elementMandible" type="button"><span>Mandible</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+  </nav>
+</aside>
+<div class="skeletal-content" id="femurView">
+<div class="pagehead"><div class="kicker">Morphometric analysis</div><h1 id="pageTitle">Femur · Bass</h1></div>
+<div class="tabs-outer"><nav class="tabs" id="tabs" aria-label="Femur analysis methods" role="tablist"><button class="tab active" role="tab" aria-selected="true" data-tab="bass" id="tab-bass">Bass</button><button class="tab" role="tab" aria-selected="false" data-tab="spradley" id="tab-spradley">Spradley</button><button class="tab" role="tab" aria-selected="false" data-tab="kanz" id="tab-kanz">Kanz</button><button class="tab" role="tab" aria-selected="false" data-tab="overview" id="tab-overview">Femur <span class="tab-count">Summary</span></button></nav></div>
+<main>
 <section class="card person-card" id="identityCard" aria-label="Specimen identity"><div class="secttop identity-actions"><div class="controlsrow"><button id="newRecord" class="button tertiary" type="button">+ New specimen</button><button id="saveRecord" class="button primary" type="button">Save specimen</button></div></div><div class="person-grid"><div class="control"><label for="individual">Individual</label><input id="individual" type="text" autocomplete="off" placeholder="e.g. F1"></div><div class="control"><label for="number">Number <small>· Inscribed bone ID</small></label><input id="number" type="text" autocomplete="off" placeholder="e.g. DEMO 001"></div><div class="control"><label for="locus">Locus <small>· Optional</small></label><input id="locus" type="text" autocomplete="off" placeholder="Enter locus"></div></div><div class="person-footer"><div class="example-row" id="exampleRow"><span class="mutedlabel">Load example</span><button class="button mini" id="sampleM" type="button">Demo A · DEMO 001</button><button class="button mini" id="sampleF" type="button">Demo B · DEMO 002</button></div><span class="notice" id="autosaveStatus">Changes stay in this browser</span></div><div class="toast" role="status" aria-live="polite" id="toast"></div></section>
 <div class="workspace" id="workspace"><section class="card maincard" id="methodPanel" aria-label="Measurements and method"><div class="secttop"><div><div class="eyebrow" id="panelKicker">01 · Combined measurements</div><h2 id="panelTitle">Femur overview</h2><p class="sub" id="panelSubtitle">All measurements in a single place</p></div><span class="meter" id="count">0 / 9 complete</span></div><div id="methodExtras"></div><div id="measurementFields" class="field-list"></div><div id="summaryView" hidden></div><div id="panelFooter"></div></section>
 <aside class="right"><section class="card" aria-label="Method result"><div class="eyebrow">Live analysis</div><h2 id="resultTitle">Femur assessment</h2><div id="resultDisplay" aria-live="polite"></div></section><section class="card" aria-label="Calculation details"><div class="eyebrow">Calculation reference</div><h3 id="calcTitle">Original workbook logic</h3><div id="calcDetail" class="helptext"></div></section></aside></div>
 <section class="card tablecard" id="savedSection"><div class="secttop"><div><div class="eyebrow">Local records</div><h2>Saved specimens <span id="savedCount" style="color:var(--muted);font-size:13px;font-weight:500">(0)</span></h2><p class="sub">Records are scoped to the selected site and tomb/context. Select a specimen to edit it in any method tab.</p></div><div class="controlsrow"><button class="button" id="exportCSV" type="button">Export CSV</button><button class="button tertiary" id="clearAll" type="button">Clear records</button></div></div><div class="table-wrap"><table><thead><tr><th>Individual</th><th>Number</th><th>Bass</th><th>Spradley</th><th>Kanz</th><th>Femur assessment</th><th>Actions</th></tr></thead><tbody id="savedBody"></tbody></table><div class="emptyline" id="emptySaved">No saved specimens yet. Load an example, or enter measurements and choose “Save specimen”.</div></div><p class="sub">Records are saved locally in this browser for the selected context. Other sites and contexts remain separate. Use Backup all to retain an independent copy. Nothing is written to the Excel workbook.</p></section>
 <p class="foot">The Bass, Spradley and Kanz calculation methods are implemented for research prototyping. Compare all results against independently validated source formulas before research use. Demonstration specimens are synthetic.</p>
-</main>
-
+</main></div>
+<section class="mandible-view" id="mandibleView" hidden aria-label="Mandible workspace">
+  <div class="pagehead"><div class="kicker">Skeletal element</div><h1>Mandible</h1></div>
+  <div class="mandible-spaced">
+    <section class="card" aria-label="Mandible specimen identification">
+      <div class="secttop"><div><div class="eyebrow">Specimen</div><h2>Mandible · Identity</h2></div>
+      <div class="mandible-actions"><button class="button tertiary" type="button" id="mandibleNew">+ New specimen</button><button class="button primary" type="button" id="mandibleSave">Save specimen</button></div></div>
+      <div class="person-grid">
+        <div class="control"><label for="mandibleIndividual">Individual</label><input id="mandibleIndividual" type="text" autocomplete="off" placeholder="Individual identifier"></div>
+        <div class="control"><label for="mandibleNumber">Number <small>· Inscribed bone ID</small></label><input id="mandibleNumber" type="text" autocomplete="off" placeholder="Bone number"></div>
+        <div class="control"><label for="mandibleLocus">Locus <small>· Optional</small></label><input id="mandibleLocus" type="text" autocomplete="off" placeholder="Enter locus"></div>
+      </div>
+      <p class="mandible-status" role="status" aria-live="polite" id="mandibleStatus">Records are stored separately from Femur.</p>
+    </section>
+    <section class="card" aria-label="Mandible measurement methods">
+      <div class="eyebrow">Measurement protocols</div><h2>Mandible · Measurements</h2>
+      <div class="mandible-note" style="margin-top:17px"><strong>Awaiting measurement protocol</strong>Mandible measurements and sex-estimation methods will appear here once the measurement definitions and calculation rules are supplied. No femur measurements or formulas are reused in this section.</div>
+    </section>
+    <section class="card" aria-label="Saved mandible specimens">
+      <div class="secttop"><div><div class="eyebrow">Local records</div><h2>Mandible specimens <span id="mandibleCount" style="color:var(--muted);font-size:13px;font-weight:500">(0)</span></h2></div><button id="mandibleExport" class="button tertiary" type="button">Export CSV</button></div>
+      <div class="table-wrap"><table class="mandible-table"><thead><tr><th>Individual</th><th>Number</th><th>Locus</th><th>Actions</th></tr></thead><tbody id="mandibleRows"></tbody></table><div class="mandible-empty" id="mandibleEmpty">No mandible specimens saved in this context.</div></div>
+    </section>
+  </div>
+</section>
+</div>
 
 <dialog id="imageModal" aria-labelledby="imageTitle"><div class="dialog-head"><div><div class="eyebrow">Measurement reference</div><h2 id="imageTitle">Measurement</h2><p class="sub" id="imageCode"></p></div><button class="close" id="closeModal" type="button" aria-label="Close image reference">×</button></div><div class="dialog-body"><div class="image-well" id="imageWell"><div class="image-placeholder"><span class="icon-lg" aria-hidden="true">▧</span>No reference image added yet.<br>Use “Add image” to attach one for this measurement.</div></div><div class="upload-row"><label class="button primary" for="imageUpload">Add / replace image</label><input id="imageUpload" type="file" accept="image/png,image/jpeg,image/webp"><button class="button tertiary" type="button" id="removeImage">Remove image</button></div><p class="dialog-note">Images are optional and are stored in this browser only (up to 700 KB each). They do not change any measurement or calculation.</p><p class="toast" id="imageMessage" role="status"></p></div></dialog>
 <script>
@@ -299,10 +363,87 @@
   let activeImage=null;
   let images=read(IMAGE_STORE,{});if(!images||typeof images!=='object')images={};
   let saveTimerLabel='';
+  let activeElement='femur';
   function currentContext(){return workspaceData.contexts.find(c=>c.id===activeContextId);}
   function currentSite(){const ctx=currentContext();return workspaceData.sites.find(s=>s.id===ctx?.siteId);}
   function contextName(){return (currentSite()?.code||'Unknown')+' · '+(currentContext()?.name||'Unknown');}
   function scopedFilename(suffix){return ((currentSite()?.code||'site')+'_'+(currentContext()?.name||'context')).replace(/[^a-z0-9]+/gi,'_').replace(/^_+|_+$/g,'')+'_'+suffix;}
+
+  // Separate Mandible prototype storage; femur data and calculation logic remain untouched.
+  const MANDIBLE_KEY='osteometry_mandible_v1';
+  function freshMandible(){return {individual:'',number:'',locus:''};}
+  function safeMandible(value){return {individual:String(value?.individual||''),number:String(value?.number||''),locus:String(value?.locus||'')};}
+  let mandibleData=read(MANDIBLE_KEY,{version:1,recordsByContext:{},draftsByContext:{}});
+  if(!mandibleData||typeof mandibleData!=='object'||typeof mandibleData.recordsByContext!=='object'||typeof mandibleData.draftsByContext!=='object')mandibleData={version:1,recordsByContext:{},draftsByContext:{}};
+  let mandibleSaved=[],mandibleState=freshMandible(),mandibleSelectedId=null;
+  function loadMandibleContext(){
+    mandibleSaved=(mandibleData.recordsByContext[activeContextId]||[]).map(row=>({...safeMandible(row),id:String(row.id||uid())}));
+    mandibleState=safeMandible(mandibleData.draftsByContext[activeContextId]);
+    mandibleSelectedId=null;
+    const existing=mandibleSaved.find(row=>keyOf(row)===keyOf(mandibleState)&&hasIdentity(mandibleState));
+    if(existing)mandibleSelectedId=existing.id;
+    ['individual','number','locus'].forEach(field=>{ $('mandible'+field[0].toUpperCase()+field.slice(1)).value=mandibleState[field]; });
+  }
+  function persistMandible(){
+    mandibleData.recordsByContext[activeContextId]=mandibleSaved.map(row=>copy(row));
+    mandibleData.draftsByContext[activeContextId]=copy(mandibleState);
+    return put(MANDIBLE_KEY,mandibleData);
+  }
+  function mandibleNotice(message){$('mandibleStatus').textContent=message;}
+  function renderMandible(){
+    const body=$('mandibleRows');
+    body.replaceChildren();
+    $('mandibleCount').textContent='('+mandibleSaved.length+')';
+    $('mandibleEmpty').hidden=mandibleSaved.length>0;
+    $('mandibleExport').disabled=mandibleSaved.length===0;
+    mandibleSaved.forEach(row=>{
+      const tr=document.createElement('tr');if(row.id===mandibleSelectedId)tr.className='selected';
+      tr.innerHTML='<td>'+esc(row.individual)+'</td><td>'+esc(row.number)+'</td><td>'+esc(row.locus||'—')+'</td><td></td>';
+      const buttons=document.createElement('div');buttons.className='mandible-table-actions';
+      const open=document.createElement('button');open.type='button';open.className='button mini';open.textContent='Open';open.addEventListener('click',()=>{
+        mandibleSelectedId=row.id;mandibleState=safeMandible(row);
+        ['individual','number','locus'].forEach(field=>{ $('mandible'+field[0].toUpperCase()+field.slice(1)).value=mandibleState[field]; });
+        persistMandible();renderMandible();mandibleNotice('Specimen opened for editing.');
+      });
+      const remove=document.createElement('button');remove.type='button';remove.className='button mini tertiary';remove.textContent='Delete';remove.addEventListener('click',()=>{
+        if(!confirm('Delete Mandible specimen '+row.number+' from '+contextName()+'?'))return;
+        mandibleSaved=mandibleSaved.filter(candidate=>candidate.id!==row.id);
+        if(mandibleSelectedId===row.id){mandibleSelectedId=null;mandibleState=freshMandible();['mandibleIndividual','mandibleNumber','mandibleLocus'].forEach(id=>$(id).value='');}
+        persistMandible();renderMandible();refreshContextBar();mandibleNotice('Mandible specimen deleted.');
+      });
+      buttons.append(open,remove);tr.lastElementChild.append(buttons);body.append(tr);
+    });
+  }
+  function saveMandible(){
+    if(!hasIdentity(mandibleState)){mandibleNotice('Enter both Individual and Number to save this specimen.');return false;}
+    const duplicate=mandibleSaved.find(row=>keyOf(row)===keyOf(mandibleState) && row.id!==mandibleSelectedId);
+    if(duplicate){mandibleNotice('A specimen with these identifiers already exists. Open its record to edit.');return false;}
+    if(!mandibleSelectedId)mandibleSelectedId=uid();
+    const index=mandibleSaved.findIndex(row=>row.id===mandibleSelectedId);
+    const entry={...safeMandible(mandibleState),id:mandibleSelectedId};
+    if(index<0)mandibleSaved.push(entry);else mandibleSaved[index]=entry;
+    const ok=persistMandible();
+    renderMandible();refreshContextBar();
+    mandibleNotice(ok?'Mandible specimen saved in this browser.':'Browser storage unavailable. Export the records before closing.');
+    return ok;
+  }
+  function setElementView(element){
+    activeElement=element==='mandible'?'mandible':'femur';
+    $('femurView').hidden=activeElement!=='femur';
+    $('mandibleView').hidden=activeElement!=='mandible';
+    for(const elementName of ['femur','mandible']){
+      const button=$('element'+elementName[0].toUpperCase()+elementName.slice(1));
+      const selected=elementName===activeElement;
+      button.classList.toggle('active',selected);
+      if(selected)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');
+    }
+    if(activeElement==='femur')renderTab();
+    else{
+      renderMandible();
+      document.title='Sex Estimation | '+(currentSite()?.code||'Site')+' / '+(currentContext()?.name||'Context')+' | Mandible';
+    }
+    refreshContextBar();
+  }
   function persistWorkspace(){
     workspaceData.recordsByContext[activeContextId]=saved.map(r=>copy(r));
     workspaceData.draftsByContext[activeContextId]=copy(state);
@@ -316,21 +457,24 @@
     $('contextSelect').innerHTML=contexts.map(c=>`<option value="${esc(c.id)}" ${c.id===ctx?.id?'selected':''}>${esc(c.name)}</option>`).join('');
     $('workspaceSiteName').textContent=site?.code||'Site';
     $('workspaceContextName').textContent=ctx?.name||'Context';
-    $('contextCount').textContent=saved.length+' specimen'+(saved.length===1?'':'s');
+    const contextRecords=activeElement==='mandible'?mandibleSaved:saved;
+    $('contextCount').textContent=contextRecords.length+' specimen'+(contextRecords.length===1?'':'s');
     $('exampleRow').hidden=!(site?.id==='site_rmil'&&ctx?.id===DEFAULT_CONTEXT);
   }
   function switchContext(nextId){
     if(!workspaceData.contexts.some(c=>c.id===nextId)||nextId===activeContextId)return;
     closeCreationPanels();
+    persistMandible();
     persistWorkspace();
     activeContextId=nextId;
+    loadMandibleContext();
     saved=(workspaceData.recordsByContext[nextId]||[]).map(r=>({...norm(r),id:r.id||uid()}));
     state=norm(workspaceData.draftsByContext[nextId]);
     selectedId=null;
     if(hasIdentity(state)){const match=saved.find(r=>keyOf(r)===keyOf(state));if(match)selectedId=match.id;}
     for(const name of ['individual','number','locus'])$(name).value=state[name]||'';
     persistWorkspace();
-    refreshContextBar();renderTab();renderSaved();
+    refreshContextBar();renderTab();renderSaved();setElementView(activeElement);
     markSave(selectedId?'Saved automatically in this browser':'Enter Individual and Number to save automatically');
     toast('Switched to '+contextName()+'. Measurements remain separate from other contexts.');
   }
@@ -452,6 +596,28 @@
   $('removeImage').addEventListener('click',()=>{delete images[activeImage];put(IMAGE_STORE,images);renderImage();$('imageMessage').textContent='Reference removed from this browser.';});
   $('closeModal').addEventListener('click',()=>$('imageModal').close());$('imageModal').addEventListener('click',e=>{if(e.target===$('imageModal'))$('imageModal').close();});
   $('methodExtras').addEventListener('click',e=>{const button=e.target.closest('[data-matrix-model]');if(!button)return;state.kanzModel=button.dataset.matrixModel;persistDraftAndMaybeRecord();renderTab();});
+
+  $('elementFemur').addEventListener('click',()=>setElementView('femur'));
+  $('elementMandible').addEventListener('click',()=>setElementView('mandible'));
+  for(const field of ['individual','number','locus']){
+    $('mandible'+field[0].toUpperCase()+field.slice(1)).addEventListener('input',e=>{
+      mandibleState[field]=e.target.value;
+      persistMandible();
+      mandibleNotice('Draft saved locally. Select Save specimen to add it to the table.');
+    });
+  }
+  $('mandibleNew').addEventListener('click',()=>{
+    mandibleSelectedId=null;mandibleState=freshMandible();
+    ['mandibleIndividual','mandibleNumber','mandibleLocus'].forEach(id=>$(id).value='');
+    persistMandible();renderMandible();mandibleNotice('New Mandible specimen.');
+    $('mandibleIndividual').focus();
+  });
+  $('mandibleSave').addEventListener('click',saveMandible);
+  $('mandibleExport').addEventListener('click',()=>{
+    if(!mandibleSaved.length)return;
+    download([['Individual','Number','Locus'],...mandibleSaved.map(row=>[row.individual,row.number,row.locus])],scopedFilename('mandible_specimens.csv'));
+    mandibleNotice('Mandible records exported as CSV.');
+  });
   document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
   for(const name of ['individual','number','locus'])$(name).addEventListener('input',e=>{state[name]=e.target.value;persistDraftAndMaybeRecord();if(active==='overview')renderSummary();});
   $('newRecord').addEventListener('click',reset);$('saveRecord').addEventListener('click',saveExplicit);
@@ -537,13 +703,13 @@
       images=(payload.referenceImages&&typeof payload.referenceImages==='object')?payload.referenceImages:{};
       put(IMAGE_STORE,images);persistWorkspace();
       for(const name of ['individual','number','locus'])$(name).value=state[name]||'';
-      refreshContextBar();renderTab();renderSaved();toast('Workspace restored successfully.');
+      loadMandibleContext();refreshContextBar();renderTab();renderSaved();setElementView(activeElement);toast('Workspace restored successfully.');
     }catch(err){alert('Could not restore backup: '+err.message);}
   });
   // The draft may correspond to an auto-saved record from a previous session.
   if(hasIdentity(state)){const match=saved.find(r=>keyOf(r)===keyOf(state));if(match)selectedId=match.id;}
   for(const name of ['individual','number','locus'])$(name).value=state[name]||'';
-  refreshContextBar();renderTab();renderSaved();markSave(selectedId?'Saved automatically in this browser':'Enter Individual and Number to save automatically');
+  loadMandibleContext();refreshContextBar();renderTab();renderSaved();setElementView('femur');markSave(selectedId?'Saved automatically in this browser':'Enter Individual and Number to save automatically');
 })();
 </script>
 </body>
