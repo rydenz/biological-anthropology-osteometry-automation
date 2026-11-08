@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Sex estimation - RMIL - TOMB 3</title>
+<style>
+:root{color-scheme:dark;--bg:#090b0f;--panel:#15181f;--panel-2:#1b1f28;--panel-3:#202630;--line:#313743;--line-soft:#272d38;--ink:#f1f4f8;--secondary:#adb7c6;--muted:#8793a4;--accent:#8cb7f8;--accent-soft:#1a314f;--green:#85c6ac;--green-bg:#173b34;--red:#e6a4a4;--red-bg:#4b292e;--gold:#e5c18a;--gold-bg:#403523;--radius:15px;--shadow:0 13px 36px rgba(0,0,0,.15)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Arial,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button{cursor:pointer}a{color:var(--accent)}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.wrap{max-width:1260px;margin:0 auto;padding-left:28px;padding-right:28px}.topbar{border-bottom:1px solid var(--line-soft);background:#0d1016}.toprow{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px}.symbol{width:38px;height:38px;border-radius:11px;background:linear-gradient(140deg,#2d4164,#192638);display:grid;place-items:center;color:#b9d3fb;font-size:19px;font-weight:700}.brandstrong{font-weight:730;letter-spacing:-.2px;font-size:15px}.brandsub{font-size:11px;color:var(--muted)}.pill{font-size:11px;border:1px solid var(--line);border-radius:20px;color:var(--secondary);padding:5px 10px;white-space:nowrap}.pagehead{padding:29px 0 19px}.kicker{font-size:11px;text-transform:uppercase;letter-spacing:1.7px;font-weight:760;color:var(--accent)}h1{margin:7px 0 5px;font-size:30px;letter-spacing:-.9px;font-weight:730}h2{font-size:19px;letter-spacing:-.35px;font-weight:710;margin:0}h3{font-size:14px;font-weight:710;margin:0}.lead{font-size:13px;color:var(--secondary);max-width:840px}.tabs-outer{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:15;background:rgba(9,11,15,.96);backdrop-filter:blur(18px)}.tabs{display:flex;align-items:center;gap:7px;overflow-x:auto;padding-top:9px}.tab{background:transparent;border:1px solid transparent;border-bottom:none;border-radius:10px 10px 0 0;color:var(--secondary);font-weight:650;padding:12px 18px;min-width:116px;white-space:nowrap}.tab:hover{background:#1b202a;color:var(--ink)}.tab.active{color:var(--ink);background:var(--panel);border-color:var(--line);position:relative}.tab.active:after{position:absolute;bottom:-2px;left:0;right:0;height:3px;background:var(--accent);content:""}.tab .tab-count{font-size:10px;color:var(--muted);padding-left:5px}main{padding-top:22px;padding-bottom:48px}.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.person-card{padding:22px;margin-bottom:20px}.secttop{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}.eyebrow{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;font-weight:750;color:var(--accent);margin-bottom:5px}.sub{font-size:12px;color:var(--muted);margin-top:6px}.person-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:18px}.control{display:flex;flex-direction:column;gap:7px;min-width:0}.control label{font-size:12px;font-weight:650;color:var(--secondary)}.control small{color:var(--muted);font-size:11px}.control input,.control select{height:43px;width:100%;background:#0e1219;border:1px solid #394250;border-radius:9px;color:var(--ink);padding:0 12px;outline:none}.control input::placeholder{color:#6e7b8d}.control input:focus,.control select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(140,183,248,.14)}.controlsrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.button{background:#242b36;color:var(--ink);border:1px solid #414956;border-radius:9px;padding:9px 13px;font-size:12px;font-weight:670;min-height:39px;display:inline-flex;align-items:center;justify-content:center;gap:7px}.button:hover{background:#2d3644}.button.primary{background:#93b9f6;border-color:#93b9f6;color:#101d31}.button.primary:hover{background:#b1ceff}.button.tertiary{background:transparent;border-color:var(--line);color:var(--secondary)}.button.mini{padding:5px 9px;min-height:28px;font-size:11px}.button:disabled{cursor:not-allowed;opacity:.45}.person-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:15px;padding-top:15px;border-top:1px solid var(--line-soft)}.example-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.mutedlabel{font-size:11px;color:var(--muted);font-weight:620}.notice{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:6px}.dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;flex-shrink:0}.workspace{display:grid;grid-template-columns:minmax(0,1.52fr) minmax(300px,.82fr);align-items:start;gap:18px}.maincard{padding:24px;min-width:0}.right{display:flex;flex-direction:column;gap:16px;position:sticky;top:79px}.right>.card{padding:21px}.meter{font-size:11px;color:var(--accent);background:var(--accent-soft);padding:5px 10px;border-radius:20px;font-weight:750}.field-list{display:flex;flex-direction:column;gap:10px;margin-top:20px}.measurement-row{display:grid;grid-template-columns:minmax(0,1fr) 168px;align-items:center;gap:16px;min-height:84px;border:1px solid var(--line-soft);border-radius:11px;padding:14px 15px;background:var(--panel-2)}.measurement-row:hover{border-color:#3f4958}.measure-info{min-width:0}.measbtn{display:inline-flex;align-items:center;gap:8px;text-align:left;padding:0;color:var(--ink);font-weight:670;font-size:13px;line-height:1.35;border:0;background:transparent}.measbtn:hover{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}.info-dot{height:19px;width:19px;min-width:19px;border-radius:50%;border:1px solid #53657f;display:inline-grid;place-items:center;font-size:11px;color:#b1cdfa;font-weight:800}.measure-meta{font-size:11px;color:var(--muted);margin-top:5px}.sharedmark{font-size:10px;color:var(--green);margin-left:6px;white-space:nowrap}.measure-input{position:relative}.measure-input input{font-size:16px;letter-spacing:.1px;font-variant-numeric:tabular-nums;padding-right:45px}.unit{position:absolute;right:12px;bottom:12px;color:var(--muted);font-size:11px;pointer-events:none}.group-label{font-size:10px;letter-spacing:1.3px;color:var(--muted);text-transform:uppercase;font-weight:770;margin:21px 0 10px}.helptext{font-size:12px;color:var(--secondary);line-height:1.55;margin-top:14px}.hintbox{font-size:12px;border-left:2px solid #759fd2;color:var(--secondary);padding:11px 12px;background:#1a2534;border-radius:0 8px 8px 0;margin-top:16px}.result-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.1px;font-weight:760}.bigscore{font-size:35px;font-weight:730;letter-spacing:-1.1px;font-variant-numeric:tabular-nums;margin:12px 0 7px}.bigscore.pending{color:var(--muted);font-size:28px;letter-spacing:-.3px}.status{display:inline-flex;align-items:center;gap:7px;border-radius:7px;padding:5px 10px;font-size:12px;font-weight:720;color:var(--secondary);background:#29313b}.status.m{color:var(--green);background:var(--green-bg)}.status.f{color:var(--red);background:var(--red-bg)}.status.i{color:var(--gold);background:var(--gold-bg)}.status.na{color:var(--muted);background:#242a33}.side-note{color:var(--secondary);font-size:12px;margin-top:14px;line-height:1.55}.formula{margin-top:13px;background:#0f141c;padding:12px;border:1px solid var(--line-soft);border-radius:8px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#c5d1e1;font-size:11px;line-height:1.8;overflow-wrap:anywhere}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}.mini-result{padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--panel-2)}.mini-result .short-title{font-size:11px;color:var(--muted);margin-bottom:8px}.mini-result strong{font-size:15px}.method-select{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px}.model-chip{border:1px solid #414a59;border-radius:8px;background:#202631;color:var(--secondary);padding:8px 12px;font-size:12px;font-weight:700}.model-chip.active{background:var(--accent-soft);color:#bdd5ff;border-color:var(--accent)}.source-select{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}.source-select label{font-size:11px;color:var(--secondary);font-weight:650}.source-select select{height:35px;background:#0e1219;color:var(--ink);border:1px solid #414956;border-radius:7px;padding:4px 8px;font-size:12px;max-width:100%}.emptyline{padding:20px;border:1px dashed #485360;border-radius:9px;color:var(--muted);margin-top:12px;text-align:center}.divider{height:1px;background:var(--line-soft);margin:19px 0}.tablecard{padding:22px;margin-top:20px}.table-wrap{overflow-x:auto;border:1px solid var(--line-soft);border-radius:10px;margin-top:15px}table{border-collapse:collapse;width:100%;min-width:720px;text-align:left}thead{background:#1e242e}th,td{padding:11px 13px;font-size:12px;border-bottom:1px solid #2c323e;white-space:nowrap}th{color:var(--secondary);font-size:11px;font-weight:690}td{color:var(--ink)}tbody tr:last-child td{border-bottom:none}tbody tr:hover{background:#212733}.actionpair{display:flex;gap:5px}.actionpair .button{min-height:28px}.summary-table{display:grid;gap:0;margin-top:12px;border:1px solid var(--line);border-radius:9px;overflow:hidden}.summary-line{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:11px 12px;border-bottom:1px solid var(--line-soft);font-size:12px}.summary-line:last-child{border-bottom:none}.summary-line span{color:var(--secondary)}.summary-line strong{text-align:right}.foot{color:var(--muted);font-size:11px;margin-top:25px;line-height:1.7}.foot a{color:#b1cfff}.toast{min-height:18px;font-size:12px;color:var(--green);margin-top:8px}.toast.error{color:var(--red)}.visuallyhidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}dialog{max-width:560px;width:calc(100% - 26px);border:1px solid #485466;border-radius:16px;background:#171c26;color:var(--ink);padding:0;box-shadow:0 25px 80px rgba(0,0,0,.6)}dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(4px)}.dialog-head{display:flex;justify-content:space-between;gap:10px;padding:19px 22px;border-bottom:1px solid var(--line)}.dialog-body{padding:21px 22px 24px}.close{border:0;background:#282f3b;border-radius:8px;color:var(--ink);font-size:19px;height:32px;width:32px}.image-well{border:1px dashed #566274;min-height:218px;border-radius:11px;background:#111720;display:grid;place-items:center;padding:18px;text-align:center;margin:14px 0;overflow:hidden}.image-well img{width:100%;max-height:410px;object-fit:contain;display:block}.image-placeholder{font-size:13px;color:var(--secondary)}.image-placeholder .icon-lg{font-size:30px;color:#6d86ab;display:block;margin-bottom:10px}.upload-row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.upload-row label{cursor:pointer}.upload-row input{display:none}.dialog-note{font-size:11px;color:var(--muted);margin-top:12px}.warning{font-size:12px;color:var(--gold)}@media(max-width:980px){.workspace{grid-template-columns:1fr}.right{position:static;display:grid;grid-template-columns:1fr 1fr;align-items:start}}@media(max-width:730px){.wrap{padding-left:15px;padding-right:15px}.person-grid{grid-template-columns:1fr 1fr}.person-grid>.control:last-child{grid-column:1/-1}.right{display:flex}.maincard,.person-card{padding:17px}.pagehead{padding:23px 0 16px}h1{font-size:25px}.measurement-row{grid-template-columns:1fr 140px;gap:8px}.tab{padding:11px 13px;min-width:auto}.toprow{min-height:62px}}@media(max-width:490px){.person-grid{grid-template-columns:1fr}.person-grid>.control:last-child{grid-column:auto}.measurement-row{grid-template-columns:1fr}.measure-input{margin-top:8px}.controlsrow .button{flex:1}.pill{display:none}.field-list{gap:8px}.result-grid{grid-template-columns:1fr 1fr}.status{max-width:100%}}
+/* Femur v3: canonical, shared measurement inputs and read-only spreadsheet-style summary */
+[hidden]{display:none!important}
+.workspace.summary-active{grid-template-columns:minmax(0,1fr)}
+.workspace.summary-active .right{display:none}
+.workspace.summary-active .maincard{padding:25px 28px}
+.summary-heading{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-top:17px;flex-wrap:wrap}
+.summary-counter{font-weight:730;font-size:14px;letter-spacing:-.12px}
+.count-divider{color:var(--muted);padding:0 6px}
+.summary-scroll{margin-top:17px;max-height:min(64vh,640px);overflow:auto}
+.femur-summary-table{min-width:800px;width:100%;table-layout:auto}
+.femur-summary-table th{position:sticky;top:0;z-index:1;background:#222936;color:#c2cad6;text-transform:none;letter-spacing:.1px;font-size:12px}
+.femur-summary-table th,.femur-summary-table td{padding:14px 16px}
+.femur-summary-table th:first-child,.femur-summary-table td:first-child{padding-left:21px}
+.femur-summary-table tbody tr:nth-child(even){background:#171c24}
+.femur-summary-table tbody tr:hover{background:#25303f}
+.femur-summary-table tbody tr.current-row{background:#1d2939}
+.femur-summary-table tbody tr.current-row td:first-child{box-shadow:inset 3px 0 #88b5f4}
+.femur-summary-table .status.compact,.tablecard .status.compact{font-size:11px;padding:4px 9px;white-space:nowrap}
+.femur-summary-table .final-sex{font-weight:760}
+.femur-summary-table .specimen-code{font-variant-numeric:tabular-nums}
+.femur-summary-table .muted-dash{color:var(--muted)}
+.femur-summary-table .empty-summary{padding:42px 18px;color:var(--muted);text-align:center;font-size:13px}
+.summary-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin:15px 0 0}
+.summary-footer .dot{margin-right:6px}
+.conflict-indicator{display:block;color:var(--gold);font-size:10px;white-space:nowrap;margin-top:6px}
+.conflict-banner{margin-top:9px;padding:9px 10px;border:1px solid #765b35;color:#f3d4a3;border-radius:8px;font-size:11px;line-height:1.5;background:#322719}
+.conflict-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.conflict-actions .button{background:#473724}
+.measurement-row{grid-template-columns:minmax(0,1fr) 168px}
+.measurement-row:has(.conflict-banner){border-color:#7b5d35}
+.control input[type=number]{appearance:textfield;-moz-appearance:textfield}
+.control input[type=number]::-webkit-inner-spin-button,.control input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.control input[aria-invalid=true]{border-color:var(--gold)}
+#autosaveStatus{display:flex;align-items:center;gap:6px}
+#autosaveStatus:before{content:'●';color:var(--green);font-size:9px}
+@media (max-width:900px){.workspace.summary-active .maincard{padding:20px}.summary-scroll{max-height:none}}
+@media (max-width:540px){.summary-heading{align-items:stretch}.summary-heading .button{width:100%}.femur-summary-table th,.femur-summary-table td{padding:11px 12px}.person-grid{grid-template-columns:1fr}.measurement-row{grid-template-columns:1fr}.measurement-row .measure-input{max-width:100%}}
+/* Kanz model-specific controls */
+.model-guidance{margin-top:12px;padding:10px 13px;background:#19212c;border:1px solid #2e4056;border-radius:10px;color:#aebccd;font-size:12px;line-height:1.5}
+.model-guidance strong{color:#e8eef8}
+.measurement-name{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.variable-tag{display:inline-flex;align-items:center;justify-content:center;min-width:43px;border-radius:6px;background:#293443;border:1px solid #445369;color:#c0d8ff;padding:3px 6px;font-size:11px;font-weight:750;letter-spacing:.2px}
+
+/* Kanz model / measurement matrix */
+.kanz-matrix-block{margin:19px 0 22px;border:1px solid #343f4e;background:#111720;border-radius:12px;overflow:hidden}
+.kanz-matrix-header{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:14px 15px 11px;border-bottom:1px solid #2b3441}
+.kanz-matrix-header h3{font-size:13px;letter-spacing:-.1px}
+.kanz-matrix-legend{display:flex;gap:11px;align-items:center;flex-wrap:wrap;font-size:10px;color:#9caabc}
+.kanz-matrix-legend span{display:inline-flex;align-items:center;gap:4px}
+.kanz-matrix-scroll{overflow-x:auto;scrollbar-color:#4b5a6e #141a24}
+.kanz-matrix{width:100%;min-width:610px;table-layout:fixed;border-collapse:separate;border-spacing:0}
+.kanz-matrix th,.kanz-matrix td{padding:7px 4px;font-size:11px;text-align:center;border-bottom:1px solid #242c38;background:transparent;height:38px}
+.kanz-matrix th{font-size:10px;font-weight:680;color:#aebbcf;background:#1a222d;height:52px}
+.kanz-matrix th:first-child{width:95px;text-align:left;padding-left:14px}
+.kanz-matrix th:last-child{width:83px;text-align:left;padding-left:9px}
+.kanz-matrix th small{display:block;font-size:9px;line-height:1.4;margin-top:2px;color:#778da7;font-weight:520}
+.kanz-matrix td:first-child{text-align:left;padding-left:10px}
+.kanz-matrix td:last-child{text-align:left;padding-left:9px}
+.kanz-matrix tbody tr:last-child td{border-bottom:0}
+.kanz-matrix tbody tr:hover{background:#1e2835}
+.kanz-matrix tbody tr.km-selected{background:#1a2c40}
+.kanz-matrix tbody tr.km-selected td:first-child{box-shadow:inset 3px 0 0 #8cb7f8}
+.kanz-matrix .km-choose{border:1px solid transparent;background:transparent;color:#c6d3e5;padding:5px 7px;border-radius:7px;font-size:11px;font-weight:710;min-width:60px;text-align:left}
+.kanz-matrix .km-choose:hover{background:#2a3950;color:#fff}
+.kanz-matrix .km-selected .km-choose{color:#c4deff;font-weight:790}
+.kanz-matrix .km-mark{font-size:16px;line-height:1;font-weight:700;display:inline-flex;justify-content:center;align-items:center;min-width:23px;min-height:23px;border-radius:5px}
+.kanz-matrix .km-mark.km-have{color:#9ad2b8;background:#1a332d}
+.kanz-matrix .km-mark.km-need{color:#b0bfce;background:#25303c}
+.kanz-matrix .km-mark.km-unused{color:#5d6b7c;font-size:13px;background:transparent}
+.km-status{font-size:10px;color:#adbbcc;white-space:nowrap;letter-spacing:.03px}
+.km-status.km-ready{color:#a5dbc0;font-weight:760}
+.km-selected .km-status:not(.km-ready){color:#cad8e9}
+.km-dot{font-size:14px;font-weight:750;line-height:1}
+.km-dot.km-have{color:#9ad2b8}.km-dot.km-need{color:#aebac9}.km-dot.km-unused{color:#617185}
+.kanz-matrix-bottom{border-top:1px solid #2b3441;padding:8px 14px;color:#8292a6;font-size:10px}
+@media(max-width:730px){.kanz-matrix-block{margin-top:15px}.kanz-matrix-header{padding:12px}.kanz-matrix th,.kanz-matrix td{padding:6px 3px}}
+.identity-actions{justify-content:flex-end}.identity-actions+.person-grid{margin-top:14px}
+/* Multi-site and tomb selection. Dataset separation is independent of method tabs. */
+.brandstrong{font-size:15px;letter-spacing:-.18px}
+.context-bar{display:flex;align-items:end;flex-wrap:wrap;gap:10px;padding-top:16px;padding-bottom:12px;border-bottom:1px solid var(--line-soft)}
+.context-field{display:flex;flex-direction:column;gap:5px;min-width:155px;max-width:240px;flex:1 1 180px}
+.context-field label{font-size:10px;text-transform:uppercase;letter-spacing:1.15px;font-weight:760;color:var(--muted)}
+.context-field select{height:40px;width:100%;background:#181c24;color:var(--ink);border:1px solid #3b4350;border-radius:9px;padding:0 30px 0 12px;font-weight:630;cursor:pointer}
+.context-field select:focus{border-color:var(--accent);outline:2px solid rgba(140,183,248,.3);outline-offset:2px}
+.context-add{height:40px;align-self:flex-end;white-space:nowrap}
+.context-end{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex:1 1 240px;padding-bottom:3px}
+.context-count{color:var(--muted);white-space:nowrap;font-size:11px;margin-right:5px}
+.file-import{cursor:pointer}
+.context-dialog{padding:0;width:min(440px,calc(100vw - 28px));background:var(--panel);border:1px solid var(--line);border-radius:17px;color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.52)}
+.context-dialog::backdrop{background:rgba(1,3,9,.72);backdrop-filter:blur(4px)}
+.context-dialog .dialog-head{border-bottom:1px solid var(--line);padding:20px 21px;display:flex;justify-content:space-between;gap:12px;align-items:start}
+.context-dialog .dialog-body{padding:20px 21px 22px;display:grid;gap:18px}
+.context-dialog .control input{width:100%;height:43px;background:#0e1219;border:1px solid #394250;border-radius:9px;color:var(--ink);padding:0 12px}
+.context-dialog .control small{color:var(--muted);font-size:11px}
+.context-dialog .close{display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;width:30px;height:30px;background:#252b35;color:var(--ink);font-size:23px;line-height:1}
+.context-dialog .dialog-error{min-height:0;margin:0;color:#eeaaaa;font-size:12px}
+.full-button{width:100%}
+@media(max-width:780px){.context-bar{align-items:stretch}.context-field{max-width:none;flex:1 1 42%}.context-end{justify-content:flex-start;flex-basis:100%}.context-add{align-self:end}}
+@media(max-width:510px){.context-field{flex-basis:100%}.context-add{flex:1 1 auto}.brandstrong{font-size:13px}.context-end{flex-wrap:wrap}}
+
+/* Inline creation forms: no modal API or pop-up permissions required. */
+.context-create-host{position:relative;z-index:10}
+.context-dialog.context-create-panel{width:min(100%,560px);margin:14px 0 8px;max-width:100%;box-shadow:0 12px 32px rgba(0,0,0,.24)}
+.context-dialog.context-create-panel[hidden]{display:none!important}
+.context-create-panel .dialog-body{gap:15px}
+.context-create-panel .dialog-error:not(:empty){padding:9px 11px;background:var(--red-bg);border-radius:7px}
+.context-create-panel .close:hover{background:#343d4b}
+
+/* Reliable site/context creation: native disclosure, no popup and no JS-dependent reveal. */
+.context-create-item{align-self:flex-end;flex:0 0 auto;min-width:90px}
+.context-create-item > summary{list-style:none;cursor:pointer;user-select:none;display:flex;align-items:center;justify-content:center}
+.context-create-item > summary::-webkit-details-marker{display:none}
+.context-create-item > summary:focus-visible{outline:2px solid #a6c5ff;outline-offset:3px}
+.context-create-item[open]{order:20;flex:1 1 100%;align-self:stretch;display:block;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px 14px}
+.context-create-item[open] > summary{width:max-content;height:35px;min-height:35px;background:var(--accent);color:#08111e;border-color:transparent}
+.create-form-holder{max-width:580px}
+.context-create-item form{display:block}
+.context-create-item .dialog-head{padding:12px 7px 13px;display:flex;align-items:start}
+.context-create-item .dialog-body{padding:10px 7px 5px;display:grid;gap:14px}
+.context-create-item .control input{width:100%;height:44px;background:#0e1219;border:1px solid #394250;border-radius:9px;color:var(--ink);padding:0 12px}
+.context-create-item .control label{display:block;margin-bottom:6px}
+.context-create-item .control small{display:block;margin-top:6px}
+.context-create-item .close{margin-left:auto}
+.context-create-item .dialog-error:not(:empty){padding:8px 11px;background:#3c2429;color:#ffc7ca;border-radius:8px}
+@media(max-width:510px){.context-create-item{flex:1 1 auto}.context-create-item[open]{flex-basis:100%}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="wrap toprow"><div class="brand"><div class="symbol" aria-hidden="true">F</div><div><div class="brandstrong" id="workspaceBrandTitle">Sex estimation - RMIL - TOMB 3</div></div></div><span class="pill">LOCAL PROTOTYPE · SOURCE FORMULAS</span></div></header>
+<section class="context-bar wrap" aria-label="Site and excavation context">
+  <div class="context-field"><label for="siteSelect">Site</label><select id="siteSelect" aria-label="Select archaeological site"></select></div>
+  <div class="context-field"><label for="contextSelect">Tomb / Context</label><select id="contextSelect" aria-label="Select tomb or excavation context"></select></div>
+  <details id="siteDialog" name="create-context" class="context-create-item">
+    <summary class="button tertiary context-add" id="addSite">+ Site</summary>
+    <div class="create-form-holder"><form id="siteCreateForm" novalidate>
+  <div class="dialog-head"><div><div class="eyebrow">Workspace structure</div><h2 id="siteDialogTitle">Add archaeological site</h2></div><button type="button" class="close" data-close-dialog="siteDialog" aria-label="Close">×</button></div>
+  <div class="dialog-body"><div class="control"><label for="siteCodeInput">Site code</label><input id="siteCodeInput" autocomplete="off" placeholder="e.g. MOTZA" maxlength="40" required><small>Short identifier shown in the workspace title.</small></div>
+  <div class="control"><label for="siteContextInput">First tomb or context</label><input id="siteContextInput" autocomplete="off" placeholder="e.g. Tomb 1 or Burial 2" maxlength="90" required><small>Each context gets an independent specimen dataset.</small></div>
+  <p class="dialog-error" id="siteDialogError" role="alert"></p><button class="button primary full-button" type="submit">Create site and context</button></div>
+</form></div>
+  </details>
+  <details id="contextDialog" name="create-context" class="context-create-item">
+    <summary class="button tertiary context-add" id="addContext">+ Tomb / Context</summary>
+    <div class="create-form-holder"><form id="contextCreateForm" novalidate>
+  <div class="dialog-head"><div><div class="eyebrow" id="contextDialogSite">Selected site</div><h2 id="contextDialogTitle">Add tomb / context</h2></div><button type="button" class="close" data-close-dialog="contextDialog" aria-label="Close">×</button></div>
+  <div class="dialog-body"><div class="control"><label for="contextNameInput">Tomb / Context name</label><input id="contextNameInput" autocomplete="off" placeholder="e.g. Tomb 4, Burial 7, Area A" maxlength="90" required></div>
+  <p class="dialog-error" id="contextDialogError" role="alert"></p><button class="button primary full-button" type="submit">Create context</button></div>
+</form></div>
+  </details>
+  <div class="context-end"><span id="contextCount" class="context-count">0 specimens</span><button class="button mini tertiary" id="backupWorkspace" type="button" title="Download a local backup of all sites and contexts">Backup all</button><label class="button mini tertiary file-import" for="restoreWorkspace" title="Restore a saved workspace backup">Restore<input id="restoreWorkspace" type="file" accept="application/json,.json" hidden></label></div>
+</section>
+
+<div class="wrap pagehead"><div class="kicker">Morphometric analysis</div><h1 id="pageTitle">Femur · Bass</h1></div>
+<div class="tabs-outer"><nav class="tabs wrap" id="tabs" aria-label="Femur analysis methods" role="tablist"><button class="tab active" role="tab" aria-selected="true" data-tab="bass" id="tab-bass">Bass</button><button class="tab" role="tab" aria-selected="false" data-tab="spradley" id="tab-spradley">Spradley</button><button class="tab" role="tab" aria-selected="false" data-tab="kanz" id="tab-kanz">Kanz</button><button class="tab" role="tab" aria-selected="false" data-tab="overview" id="tab-overview">Femur <span class="tab-count">Summary</span></button></nav></div>
+<main class="wrap">
+<section class="card person-card" id="identityCard" aria-label="Specimen identity"><div class="secttop identity-actions"><div class="controlsrow"><button id="newRecord" class="button tertiary" type="button">+ New specimen</button><button id="saveRecord" class="button primary" type="button">Save specimen</button></div></div><div class="person-grid"><div class="control"><label for="individual">Individual</label><input id="individual" type="text" autocomplete="off" placeholder="e.g. F1"></div><div class="control"><label for="number">Number <small>· Inscribed bone ID</small></label><input id="number" type="text" autocomplete="off" placeholder="e.g. DEMO 001"></div><div class="control"><label for="locus">Locus <small>· Optional</small></label><input id="locus" type="text" autocomplete="off" placeholder="Enter locus"></div></div><div class="person-footer"><div class="example-row" id="exampleRow"><span class="mutedlabel">Load example</span><button class="button mini" id="sampleM" type="button">Demo A · DEMO 001</button><button class="button mini" id="sampleF" type="button">Demo B · DEMO 002</button></div><span class="notice" id="autosaveStatus">Changes stay in this browser</span></div><div class="toast" role="status" aria-live="polite" id="toast"></div></section>
+<div class="workspace" id="workspace"><section class="card maincard" id="methodPanel" aria-label="Measurements and method"><div class="secttop"><div><div class="eyebrow" id="panelKicker">01 · Combined measurements</div><h2 id="panelTitle">Femur overview</h2><p class="sub" id="panelSubtitle">All measurements in a single place</p></div><span class="meter" id="count">0 / 9 complete</span></div><div id="methodExtras"></div><div id="measurementFields" class="field-list"></div><div id="summaryView" hidden></div><div id="panelFooter"></div></section>
+<aside class="right"><section class="card" aria-label="Method result"><div class="eyebrow">Live analysis</div><h2 id="resultTitle">Femur assessment</h2><div id="resultDisplay" aria-live="polite"></div></section><section class="card" aria-label="Calculation details"><div class="eyebrow">Calculation reference</div><h3 id="calcTitle">Original workbook logic</h3><div id="calcDetail" class="helptext"></div></section></aside></div>
+<section class="card tablecard" id="savedSection"><div class="secttop"><div><div class="eyebrow">Local records</div><h2>Saved specimens <span id="savedCount" style="color:var(--muted);font-size:13px;font-weight:500">(0)</span></h2><p class="sub">Records are scoped to the selected site and tomb/context. Select a specimen to edit it in any method tab.</p></div><div class="controlsrow"><button class="button" id="exportCSV" type="button">Export CSV</button><button class="button tertiary" id="clearAll" type="button">Clear records</button></div></div><div class="table-wrap"><table><thead><tr><th>Individual</th><th>Number</th><th>Bass</th><th>Spradley</th><th>Kanz</th><th>Femur assessment</th><th>Actions</th></tr></thead><tbody id="savedBody"></tbody></table><div class="emptyline" id="emptySaved">No saved specimens yet. Load an example, or enter measurements and choose “Save specimen”.</div></div><p class="sub">Records are saved locally in this browser for the selected context. Other sites and contexts remain separate. Use Backup all to retain an independent copy. Nothing is written to the Excel workbook.</p></section>
+<p class="foot">The Bass, Spradley and Kanz calculation methods are implemented for research prototyping. Compare all results against independently validated source formulas before research use. Demonstration specimens are synthetic.</p>
+</main>
+
+
+<dialog id="imageModal" aria-labelledby="imageTitle"><div class="dialog-head"><div><div class="eyebrow">Measurement reference</div><h2 id="imageTitle">Measurement</h2><p class="sub" id="imageCode"></p></div><button class="close" id="closeModal" type="button" aria-label="Close image reference">×</button></div><div class="dialog-body"><div class="image-well" id="imageWell"><div class="image-placeholder"><span class="icon-lg" aria-hidden="true">▧</span>No reference image added yet.<br>Use “Add image” to attach one for this measurement.</div></div><div class="upload-row"><label class="button primary" for="imageUpload">Add / replace image</label><input id="imageUpload" type="file" accept="image/png,image/jpeg,image/webp"><button class="button tertiary" type="button" id="removeImage">Remove image</button></div><p class="dialog-note">Images are optional and are stored in this browser only (up to 700 KB each). They do not change any measurement or calculation.</p><p class="toast" id="imageMessage" role="status"></p></div></dialog>
+<script>
+(function () {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const WORKSPACE_KEY = 'sex_estimation_workspace_sites_v1';
+  let storageFailure = false;
+  const LEGACY_V3_STORAGE = 'femur_workbench_saved_v3';
+  const LEGACY_V3_DRAFT = 'femur_workbench_draft_v3';
+  const LEGACY_STORAGE = 'femur_workbench_saved_v2';
+  const LEGACY_DRAFT = 'femur_workbench_draft_v2';
+  const IMAGE_STORE = 'femur_workbench_images_v2';
+
+  // A single canonical key is used for every numbered measurement within a specimen.
+  // "6/7" is an ambiguous source designation, not a second occurrence of #7.
+  const fields = {
+    '19': { name: 'Maximum diameter of head (19)', code: '19', used: 'Bass · Spradley · Kanz MHD (when #19 is selected)', shared: true },
+    '21': { name: 'Epicondylar breadth (21)', kanzName: 'Condylar width (21)', code: '21', used: 'Spradley · Kanz', shared: true },
+    '2': { name: 'Bicondylar length (2)', code: '2', used: 'Spradley' },
+    '1': { name: 'Maximal length (1)', code: '1', used: 'Kanz · ML' },
+    '18': { name: 'Vertical head diameter (18)', code: '18', used: 'Kanz · VHD; can also supply MHD when #18 is selected' },
+    '6or7': { name: 'Maximum midshaft diameter (6 or 7)', code: '6 or 7', used: 'Kanz · MMD · distinct maximum measurement' },
+    '7': { name: 'Transverse midshaft diameter (7)', code: '7', used: 'Kanz · TMD' },
+    '20': { name: 'Head circumference (20)', code: '20', used: 'Kanz · HC' }
+  };
+  const order = {
+    bass: ['19'],
+    spradley: ['21', '19', '2'],
+    kanz: ['1', '19', '6or7', '18', '21', '7', '20']
+  };
+  const models = {
+    Optimal: { req: ['ML','MHD','MMD'], expr: '0.069 × ML + 1.05 × MHD + 0.215 × MMD − 82.27', fn: x => .069*x.ML + 1.05*x.MHD + .215*x.MMD - 82.27 },
+    Stepwise: { req: ['ML','VHD'], expr: '0.076 × ML + 1.05 × VHD − 79.23', fn: x => .076*x.ML + 1.05*x.VHD - 79.23 },
+    M1: { req: ['VHD','CW'], expr: '1.17 × VHD + 0.14 × CW − 62.15', fn: x => 1.17*x.VHD + .14*x.CW - 62.15 },
+    M2: { req: ['MHD','CW'], expr: '1.2 × MHD + 0.15 × CW − 64.1', fn: x => 1.2*x.MHD + .15*x.CW - 64.1 },
+    M3: { req: ['ML','MHD','CW'], expr: '0.073 × ML + 1.03 × MHD + 0.059 × CW − 81.35', fn: x => .073*x.ML + 1.03*x.MHD + .059*x.CW - 81.35 },
+    M4: { req: ['ML','VHD','CW'], expr: '0.073 × ML + 1.01 × VHD + 0.051 × CW − 79.64', fn: x => .073*x.ML + 1.01*x.VHD + .051*x.CW - 79.64 },
+    M5: { req: ['ML','TMD','MHD','CW'], expr: '0.071 × ML − 0.17 × TMD + 1.09 × MHD + 0.084 × CW − 80.39', fn: x => .071*x.ML - .17*x.TMD + 1.09*x.MHD + .084*x.CW - 80.39 },
+    M6: { req: ['HC','MMD'], expr: '0.37 × HC + 0.33 × MMD − 60.48', fn: x => .37*x.HC + .33*x.MMD - 60.48 }
+  };
+  // Exact column order D–J in the Femur Kanz source worksheet. Each selected
+  // discriminant function uses only the corresponding source columns.
+  const kanzColumnOrder = ['ML','MHD','MMD','VHD','CW','TMD','HC'];
+  function kanzInputFields(r=state) {
+    const model = models[r.kanzModel] || models.Optimal;
+    const codeByVariable = { ML:'1', MHD:r.kanzHeadSource==='18'?'18':'19', MMD:'6or7', VHD:'18', CW:'21', TMD:'7', HC:'20' };
+    return kanzColumnOrder.filter(variable => model.req.includes(variable))
+      .map(role => ({role, code:codeByVariable[role]}));
+  }
+  // A view of the Kanz worksheet's D–J variable requirements. This does not
+  // change the original discriminant functions or the stored measurements.
+  function kanzMatrixHtml(){
+    const code = {ML:'1',MHD:state.kanzHeadSource==='18'?'18':'19',MMD:'6or7',VHD:'18',CW:'21',TMD:'7',HC:'20'};
+    const descriptions = {ML:'Maximal length',MHD:'Maximum diameter of head',MMD:'Maximum midshaft diameter',VHD:'Vertical head diameter',CW:'Condylar width',TMD:'Transverse midshaft diameter',HC:'Head circumference'};
+    const headings=kanzColumnOrder.map(variable=>`<th scope="col" title="${esc(descriptions[variable])} (${esc(code[variable]==='6or7'?'6 or 7':code[variable])})">${esc(variable)}<small>${esc(code[variable]==='6or7'?'6 / 7':'#'+code[variable])}</small></th>`).join('');
+    const rows=Object.entries(models).map(([name,model])=>{
+      const needed=model.req;
+      const found=needed.filter(variable=>numberFor(code[variable])!==null && !state.conflicts?.[code[variable]]);
+      const ready=found.length===needed.length;
+      const cells=kanzColumnOrder.map(variable=>{
+        if(!needed.includes(variable))return '<td><span class="km-mark km-unused" aria-label="Not used">·</span></td>';
+        const available=found.includes(variable);
+        const label=variable+' required: '+(available?'available':'not yet measured');
+        return `<td><span class="km-mark ${available?'km-have':'km-need'}" data-availability="${available?'available':'missing'}" role="img" aria-label="${esc(label)}" title="${esc(label)}">${available?'●':'○'}</span></td>`;
+      }).join('');
+      return `<tr class="${name===state.kanzModel?'km-selected':''}"><td><button type="button" class="km-choose" data-matrix-model="${esc(name)}" aria-label="Select Kanz model ${esc(name)}" aria-pressed="${name===state.kanzModel}">${esc(name)}</button></td>${cells}<td><span class="km-status ${ready?'km-ready':''}" aria-label="${ready?'All required measurements available':found.length+' of '+needed.length+' required measurements available'}">${ready?'Ready':found.length+' / '+needed.length}</span></td></tr>`;
+    }).join('');
+    return `<div class="kanz-matrix-header"><h3 id="kanzMatrixTitle">Kanz · Measurement requirements</h3><div class="kanz-matrix-legend" aria-label="Table key"><span><b class="km-dot km-have">●</b>Available</span><span><b class="km-dot km-need">○</b>Missing</span><span><b class="km-dot km-unused">·</b>Not used</span></div></div><div class="kanz-matrix-scroll"><table class="kanz-matrix" aria-labelledby="kanzMatrixTitle"><thead><tr><th scope="col">Model</th>${headings}<th scope="col">Status</th></tr></thead><tbody>${rows}</tbody></table></div><div class="kanz-matrix-bottom">D–J · Measurement variables from the original Kanz worksheet</div>`;
+  }
+  function refreshKanzMatrix(){const box=$('kanzModelMatrix');if(box && active==='kanz')box.innerHTML=kanzMatrixHtml();}
+  function visibleInputFields(tab=active) {
+    return tab==='kanz' ? kanzInputFields() : (order[tab]||[]).map(code=>({role:null,code}));
+  }
+  const oldKeys = { head19:'19', epicondylar21:'21', bicondylar2:'2', maxLength1:'1', verticalHead18:'18', maxMidshaft67:'6or7', transverseMidshaft7:'7', headCircumference20:'20' };
+  function empty() { return { individual:'', number:'', locus:'', measurements:{}, kanzModel:'Optimal', kanzHeadSource:'19', conflicts:{} }; }
+  function read(key, fallback) { try { const s = localStorage.getItem(key); return s === null ? fallback : JSON.parse(s); } catch { return fallback; } }
+  function put(key, val) { try { localStorage.setItem(key, JSON.stringify(val)); return true; } catch { storageFailure=true; return false; } }
+  function copy(obj) { return JSON.parse(JSON.stringify(obj)); }
+  function norm(record) {
+    if (!record || typeof record !== 'object') return empty();
+    const out = { ...empty(), individual:String(record.individual||''), number:String(record.number||''), locus:String(record.locus||''), kanzModel:models[record.kanzModel]?record.kanzModel:'Optimal', kanzHeadSource:record.kanzHeadSource==='18'?'18':'19', conflicts:copy(record.conflicts||{}) };
+    const source=record.measurements||{};
+    for (const key of Object.keys(fields)) if (source[key]!==undefined) out.measurements[key]=String(source[key]);
+    for (const [oldKey,newKey] of Object.entries(oldKeys)) if (source[oldKey]!==undefined && out.measurements[newKey]===undefined) out.measurements[newKey]=String(source[oldKey]);
+    // The previous prototype incorrectly stored measurement #21 in two fields.
+    // Do not silently select a potentially incorrect research value on migration.
+    const spradley=source.epicondylar21, kanz=source.condylarWidth21;
+    if (spradley!==undefined && spradley!=='' && kanz!==undefined && kanz!=='' &&
+        Number(String(spradley).replace(',','.'))!==Number(String(kanz).replace(',','.')) &&
+        source['21']===undefined) {
+      out.conflicts['21']={spradley:String(spradley),kanz:String(kanz)};
+      out.measurements['21']='';
+    } else if (out.measurements['21']===undefined && kanz!==undefined) {
+      out.measurements['21']=String(kanz);
+    }
+    return out;
+  }
+  // Storage hierarchy: site -> tomb/context -> specimen -> measurement number.
+  // Existing v2/v3 research records are copied non-destructively into RMIL / Tomb 3.
+  const DEFAULT_CONTEXT='ctx_rmil_tomb_3';
+  function makeInitialWorkspace(){
+    let legacyRows=read(LEGACY_V3_STORAGE,null);
+    if(!Array.isArray(legacyRows))legacyRows=read(LEGACY_STORAGE,[]);
+    if(!Array.isArray(legacyRows))legacyRows=[];
+    const records=legacyRows.map(r=>({...norm(r),id:r.id||uid()}));
+    const previousDraft=read(LEGACY_V3_DRAFT, read(LEGACY_DRAFT,null));
+    const draft=norm(previousDraft);
+    if(hasIdentity(draft)&&!records.some(r=>keyOf(r)===keyOf(draft))) records.push({...copy(draft),id:uid()});
+    return {version:1,sites:[{id:'site_rmil',code:'RMIL'}],contexts:[{id:DEFAULT_CONTEXT,siteId:'site_rmil',name:'Tomb 3'}],activeContextId:DEFAULT_CONTEXT,recordsByContext:{[DEFAULT_CONTEXT]:records},draftsByContext:{[DEFAULT_CONTEXT]:draft}};
+  }
+  function loadWorkspace(){
+    let w=read(WORKSPACE_KEY,null);
+    if(!w||!Array.isArray(w.sites)||!Array.isArray(w.contexts)||!w.sites.length||!w.contexts.length||!w.recordsByContext||typeof w.recordsByContext!=='object'){
+      w=makeInitialWorkspace();put(WORKSPACE_KEY,w);
+    }
+    if(!w.contexts.some(c=>c.id===w.activeContextId))w.activeContextId=w.contexts[0].id;
+    if(!w.draftsByContext||typeof w.draftsByContext!=='object')w.draftsByContext={};
+    return w;
+  }
+  let workspaceData=loadWorkspace();
+  let activeContextId=workspaceData.activeContextId;
+  let saved=(workspaceData.recordsByContext[activeContextId]||[]).map(r=>({...norm(r),id:r.id||uid()}));
+  let state=norm(workspaceData.draftsByContext[activeContextId]);
+  let selectedId=null;
+  let active='bass';
+  let activeImage=null;
+  let images=read(IMAGE_STORE,{});if(!images||typeof images!=='object')images={};
+  let saveTimerLabel='';
+  function currentContext(){return workspaceData.contexts.find(c=>c.id===activeContextId);}
+  function currentSite(){const ctx=currentContext();return workspaceData.sites.find(s=>s.id===ctx?.siteId);}
+  function contextName(){return (currentSite()?.code||'Unknown')+' · '+(currentContext()?.name||'Unknown');}
+  function scopedFilename(suffix){return ((currentSite()?.code||'site')+'_'+(currentContext()?.name||'context')).replace(/[^a-z0-9]+/gi,'_').replace(/^_+|_+$/g,'')+'_'+suffix;}
+  function persistWorkspace(){
+    workspaceData.recordsByContext[activeContextId]=saved.map(r=>copy(r));
+    workspaceData.draftsByContext[activeContextId]=copy(state);
+    workspaceData.activeContextId=activeContextId;
+    return put(WORKSPACE_KEY,workspaceData);
+  }
+  function refreshContextBar(){
+    const site=currentSite(),ctx=currentContext();
+    $('siteSelect').innerHTML=workspaceData.sites.map(s=>`<option value="${esc(s.id)}" ${s.id===site?.id?'selected':''}>${esc(s.code)}</option>`).join('');
+    const contexts=workspaceData.contexts.filter(c=>c.siteId===site?.id);
+    $('contextSelect').innerHTML=contexts.map(c=>`<option value="${esc(c.id)}" ${c.id===ctx?.id?'selected':''}>${esc(c.name)}</option>`).join('');
+    $('workspaceBrandTitle').textContent='Sex estimation - '+(site?.code||'Site').toUpperCase()+' - '+(ctx?.name||'Context').toUpperCase();
+    $('contextCount').textContent=saved.length+' specimen'+(saved.length===1?'':'s');
+    $('exampleRow').hidden=!(site?.id==='site_rmil'&&ctx?.id===DEFAULT_CONTEXT);
+  }
+  function switchContext(nextId){
+    if(!workspaceData.contexts.some(c=>c.id===nextId)||nextId===activeContextId)return;
+    closeCreationPanels();
+    persistWorkspace();
+    activeContextId=nextId;
+    saved=(workspaceData.recordsByContext[nextId]||[]).map(r=>({...norm(r),id:r.id||uid()}));
+    state=norm(workspaceData.draftsByContext[nextId]);
+    selectedId=null;
+    if(hasIdentity(state)){const match=saved.find(r=>keyOf(r)===keyOf(state));if(match)selectedId=match.id;}
+    for(const name of ['individual','number','locus'])$(name).value=state[name]||'';
+    persistWorkspace();
+    refreshContextBar();renderTab();renderSaved();
+    markSave(selectedId?'Saved automatically in this browser':'Enter Individual and Number to save automatically');
+    toast('Switched to '+contextName()+'. Measurements remain separate from other contexts.');
+  }
+  function uid(){return 'spec_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,9);}
+  function esc(x){return String(x??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+  function keyOf(r){return [r.individual,r.number].map(s=>String(s||'').replace(/\s+/g,' ').trim().toLowerCase()).join('|');}
+  function hasIdentity(r){return !!String(r.individual||'').trim() && !!String(r.number||'').trim();}
+  function numberFor(code,r=state){const raw=r.measurements?.[code];if(raw===undefined||raw===null||String(raw).trim()==='')return null;const n=Number(String(raw).replace(',','.'));return Number.isFinite(n)&&n>0?n:null;}
+  function fmt(n,d=3){return n===null||n===undefined?'—':Number(n).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d,useGrouping:false});}
+  function sexLabel(sex){return {F:'F',M:'M',I:'Indeterminate','F?':'F?', 'M?':'M?',Review:'Review'}[sex]||'—';}
+  function pill(s,small=false){const cls=s==='M'?'m':s==='F'?'f':s==='I'?'i':'na';return s?`<span class="status ${cls} ${small?'compact':''}">${esc(sexLabel(s))}</span>`:'<span class="muted-dash" aria-label="Not yet calculated">—</span>';}
+  function bass(r=state){const n=numberFor('19',r);if(n===null)return{sex:null,missing:['19']};if([42.5,43.5,46.5,47.5].some(x=>Math.abs(n-x)<1e-10))return {sex:'Review',measurement:n,note:'Exact source interval boundary; verify before classification'};if(n<42.5)return{sex:'F',measurement:n,note:'Female (< 42.5 mm)'};if(n<43.5)return{sex:'F?',measurement:n,note:'Female? (42.5–43.5 mm)'};if(n<46.5)return{sex:'I',measurement:n,note:'Indeterminate (43.5–46.5 mm)'};if(n<47.5)return{sex:'M?',measurement:n,note:'Male? (46.5–47.5 mm)'};return{sex:'M',measurement:n,note:'Male (> 47.5 mm)'};}
+  function spradley(r=state){const E=numberFor('21',r),F=numberFor('19',r),G=numberFor('2',r);const missing=[['21',E],['19',F],['2',G]].filter(x=>x[1]===null).map(x=>x[0]);if(missing.length)return{sex:null,missing};const score=.3644*E+.52629*F+.02826*G-65.70614;return{sex:score>0?'M':score<0?'F':'I',score};}
+  function kanz(r=state){const model=models[r.kanzModel]||models.Optimal;const x={ML:numberFor('1',r),MHD:numberFor(r.kanzHeadSource==='18'?'18':'19',r),MMD:numberFor('6or7',r),VHD:numberFor('18',r),CW:numberFor('21',r),TMD:numberFor('7',r),HC:numberFor('20',r)};const missing=model.req.filter(k=>x[k]===null);if(missing.length)return{sex:null,missing,model:r.kanzModel};const score=model.fn(x);return{sex:score>0?'M':score<0?'F':'I',score,model:r.kanzModel};}
+  function femur(r=state){const a=bass(r),b=spradley(r),c=kanz(r);const arr=[a.sex,b.sex,c.sex];const f=arr.filter(x=>x==='F').length,m=arr.filter(x=>x==='M').length;const sex=f>=2?'F':m>=2?'M':arr.some(x=>x===null)?null:'I';return{bass:a,spradley:b,kanz:c,sex};}
+  function toast(text,bad=false){$('toast').textContent=text;$('toast').classList.toggle('error',bad);}
+  function currentRecords(){const rows=saved.map(x=>copy(x));if(hasIdentity(state)){let idx=selectedId?rows.findIndex(r=>r.id===selectedId):-1;if(idx<0)idx=rows.findIndex(r=>keyOf(r)===keyOf(state));if(idx>=0)rows[idx]={...copy(state),id:rows[idx].id};else rows.push({...copy(state),id:'__draft__'});}return rows;}
+  function markSave(message){const badge=$('autosaveStatus');if(badge)badge.textContent=message;}
+  function persistDraftAndMaybeRecord(){if(!hasIdentity(state)){persistWorkspace();markSave('Add Individual and Number to save automatically');renderSaved();return;}
+    const match=saved.find(x=>keyOf(x)===keyOf(state)&&x.id!==selectedId);
+    if(match){persistWorkspace();markSave('Matching saved record exists — open it to edit');renderSaved();return;}
+    if(!selectedId)selectedId=uid();
+    const idx=saved.findIndex(x=>x.id===selectedId);
+    if(idx>=0)saved[idx]={...copy(state),id:selectedId};else saved.push({...copy(state),id:selectedId});
+    const ok=persistWorkspace();markSave(ok?'Saved automatically in this browser':'Storage unavailable — export your data');renderSaved();
+  }
+  function editMeasure(code, raw) {
+    // Clearing a field removes its underlying value altogether. An empty
+    // field must never be interpreted as an available Kanz variable.
+    const value = String(raw ?? '').trim().replace(',', '.');
+    const current = String(state.measurements[code] ?? '');
+    const hasConflict = !!state.conflicts?.[code];
+    // 'change' may fire on blur after 'input'. Do not rebuild the table for
+    // an unchanged value: rebuilding during mouse-down would eat model clicks.
+    if (value === current && !hasConflict) return;
+    if (value === '') delete state.measurements[code];
+    else state.measurements[code] = value;
+    if (hasConflict) delete state.conflicts[code];
+
+    // Recompute every affected view from the same canonical measurement map.
+    persistDraftAndMaybeRecord();
+    showLive();
+    refreshKanzMatrix();
+  }
+  function resolveConflict(code,choice){const c=state.conflicts?.[code];if(!c)return;state.measurements[code]=c[choice];delete state.conflicts[code];persistDraftAndMaybeRecord();renderTab();toast('Measurement #'+code+' reconciled. The value is shared across methods.');}
+  function renderInputs(){const holder=$('measurementFields');holder.innerHTML=visibleInputFields().map(({code,role})=>{
+    const meta=fields[code];
+    const baseTitle=active==='kanz'&&meta.kanzName?meta.kanzName:meta.name;
+    const title=role==='MHD'?`Maximum diameter of head (${code})`:baseTitle;
+    const roleTag=role?`<span class="variable-tag" aria-label="Kanz variable ${esc(role)}">${esc(role)}</span>`:'';
+    const val=state.measurements?.[code]??'';
+    const conflict=state.conflicts?.[code];const conflictHtml=conflict?`<div class="conflict-banner"><strong>Review legacy #${code} values:</strong> Spradley ${esc(conflict.spradley)} mm / Kanz ${esc(conflict.kanz)} mm. Choose the correct value for this specimen.<div class="conflict-actions"><button class="button mini" data-resolve="spradley" data-code="${code}">Use ${esc(conflict.spradley)} mm</button><button class="button mini" data-resolve="kanz" data-code="${code}">Use ${esc(conflict.kanz)} mm</button></div></div>`:'';
+    const caveat=code==='6or7'?'The source designates this maximum as 6 or 7. Do not assume it equals transverse diameter #7.':'';
+    return `<div class="measurement-row"><div class="measure-info"><div class="measurement-name">${roleTag}<button class="measbtn" type="button" data-image="${code}" title="View or upload measurement reference"><span>${esc(title)}</span><span class="info-dot" aria-hidden="true">i</span></button></div><div class="measure-meta">${esc(meta.used)} ${meta.shared?'<span class="sharedmark">· shared value</span>':''}</div>${caveat?`<div class="measure-meta">${esc(caveat)}</div>`:''}${conflictHtml}</div><div class="control measure-input"><label class="visuallyhidden" for="measure-${code}">${esc(title)} in mm</label><input id="measure-${code}" data-measure="${code}" value="${esc(val)}" type="number" min="0" step="any" inputmode="decimal" placeholder="Enter value" aria-label="${esc(title)} in mm" ${conflict?'aria-invalid="true"':''}><span class="unit">mm</span></div></div>`;
+  }).join('');
+    const boundRecord=state, boundContext=activeContextId;
+    holder.querySelectorAll('[data-measure]').forEach(el=>{
+      // Ignore late blur/change events from a field belonging to a previous
+      // specimen or context. Otherwise a switch could overwrite new context data.
+      for (const eventName of ['input','change']) {
+        el.addEventListener(eventName, e=>{
+          if(state!==boundRecord||activeContextId!==boundContext||!el.isConnected)return;
+          editMeasure(e.target.dataset.measure,e.target.value);
+        });
+      }
+    });
+    holder.querySelectorAll('[data-image]').forEach(el=>el.addEventListener('click',e=>openImage(e.currentTarget.dataset.image)));
+    holder.querySelectorAll('[data-resolve]').forEach(el=>el.addEventListener('click',e=>resolveConflict(e.currentTarget.dataset.code,e.currentTarget.dataset.resolve)));
+  }
+  function setTab(name){active=name;renderTab();}
+  function renderTab(){const titleByTab={bass:'Bass',spradley:'Spradley',kanz:'Kanz',overview:'Summary'};const pageTitle='Femur · '+(titleByTab[active]||'Bass');$('pageTitle').textContent=pageTitle;document.title='Sex estimation - '+(currentSite()?.code||'Site').toUpperCase()+' - '+(currentContext()?.name||'Context').toUpperCase()+' | '+pageTitle;document.querySelectorAll('.tab').forEach(b=>{const on=b.dataset.tab===active;b.classList.toggle('active',on);b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;});
+    const summary=active==='overview';$('workspace').classList.toggle('summary-active',summary);$('identityCard').hidden=summary;$('savedSection').hidden=summary;$('count').hidden=summary;
+    $('measurementFields').hidden=summary;$('methodExtras').hidden=summary;$('summaryView').hidden=!summary;$('panelFooter').hidden=summary;
+    if(summary){$('panelKicker').textContent='Automatically generated · Source columns A–G';$('panelTitle').textContent='Femur · Sex estimation summary';$('panelSubtitle').textContent='Read-only table with the same column structure as the Femur worksheet. Every method is calculated from the single specimen record; no entry is needed here.';$('panelSubtitle').hidden=false;renderSummary();return;}
+    const title={bass:['01 · Reference method','Bass · Femoral head','One measurement, classified using the workbook’s Bass ranges.'],spradley:['02 · Discriminant function','Spradley · Femur','Enter E, F and G in the original worksheet order. Measurement numbers are shared across tabs.'],kanz:['03 · Discriminant functions','Kanz · Femur','']}[active];
+    $('panelKicker').textContent=title[0];$('panelTitle').textContent=title[1];$('panelSubtitle').textContent=title[2];$('panelSubtitle').hidden=!title[2];
+    if(active==='kanz'){
+      const required=models[state.kanzModel].req;
+      const hasMHD=required.includes('MHD');
+      $('methodExtras').innerHTML=`<div class="kanz-matrix-block" id="kanzModelMatrix">${kanzMatrixHtml()}</div><div class="group-label">Kanz · Model selection (column K)</div><div class="method-select" role="group" aria-label="Kanz model">${Object.keys(models).map(name=>`<button type="button" class="model-chip ${state.kanzModel===name?'active':''}" data-model="${name}" aria-pressed="${state.kanzModel===name}">${name}</button>`).join('')}</div>${hasMHD?`<div class="source-select"><label for="kanzHeadSource">MHD source (18 / 19)</label><select id="kanzHeadSource"><option value="19" ${state.kanzHeadSource==='19'?'selected':''}>#19 · Maximum diameter of head (shared)</option><option value="18" ${state.kanzHeadSource==='18'?'selected':''}>#18 · Vertical head diameter</option></select></div>`:''}`;
+      if(hasMHD)$('kanzHeadSource').addEventListener('change',e=>{state.kanzHeadSource=e.target.value;persistDraftAndMaybeRecord();renderTab();});
+      $('methodExtras').querySelectorAll('[data-model]').forEach(b=>b.addEventListener('click',()=>{state.kanzModel=b.dataset.model;persistDraftAndMaybeRecord();renderTab();}));
+    }else $('methodExtras').innerHTML='';
+    renderInputs();$('panelFooter').innerHTML=`<div class="hintbox">${active==='kanz'?'Kanz input fields follow the selected model in column K. Switching models never clears existing measurements. ':' ' }Measurements #19 and #21 are shared across all methods that use those numbers. Each value is stored once for the current Individual + Number. Kanz’s “6 or 7” maximum is retained as a separate source-defined measurement.</div>`;
+    showLive();
+  }
+  function showLive(){if(active==='overview'){renderSummary();return;}
+    const list=visibleInputFields();const completed=list.filter(({code})=>numberFor(code)!==null).length;$('count').textContent=`${completed} / ${list.length} measured`;
+    const a=bass(),s=spradley(),k=kanz();
+    if(active==='bass'){$('resultTitle').textContent='Bass · Classification';$('resultDisplay').innerHTML=`<div class="result-label">Maximum diameter of head (19)</div><div class="bigscore ${a.measurement===undefined?'pending':''}">${a.measurement===undefined?'Pending':fmt(a.measurement,2)+' mm'}</div>${pill(a.sex)}<p class="side-note">${esc(a.note||'Enter measurement #19 to calculate this classification.')}</p>`;$('calcTitle').textContent='Bass · Source reference ranges';$('calcDetail').innerHTML='<div class="formula">Female: &lt; 42.5 mm<br>Female?: 42.5–43.5 mm<br>Indeterminate: 43.5–46.5 mm<br>Male?: 46.5–47.5 mm<br>Male: &gt; 47.5 mm</div><p class="helptext">Threshold endpoints overlap in the source. Exact boundary values are marked for review rather than assigned arbitrarily.</p>';return;}
+    const isSpradley=active==='spradley',r=isSpradley?s:k,model=models[state.kanzModel];$('resultTitle').textContent=isSpradley?'Spradley · Result':`Kanz · ${state.kanzModel} result`;
+    $('resultDisplay').innerHTML=`<div class="result-label">Discriminant score</div><div class="bigscore ${r.score===undefined?'pending':''}">${r.score===undefined?'Pending':fmt(r.score,4)}</div>${pill(r.sex)}<p class="side-note">${r.missing?.length?'Missing required input: '+esc(r.missing.join(', '))+'.':r.sex==='M'?'Positive score → M':r.sex==='F'?'Negative score → F':'Zero score → I'}</p>`;
+    $('calcTitle').textContent=isSpradley?'Spradley · Original formula':`Kanz · ${state.kanzModel} original formula`;
+    $('calcDetail').innerHTML=isSpradley?'<div class="formula">0.3644 × E + 0.52629 × F + 0.02826 × G − 65.70614</div><p class="helptext">E = Epicondylar breadth (#21)<br>F = Maximum diameter of head (#19)<br>G = Bicondylar length (#2)</p>':`<div class="formula">${esc(model.expr)}</div><p class="helptext">Required: ${kanzInputFields().map(({role,code})=>esc(role)+' = #'+esc(code==='6or7'?'6 or 7':code)).join(' · ')}</p>`;
+  }
+  function summaryRow(record,isCurrent=false){const f=femur(record);const values=[record.locus,record.individual,record.number];const cells=values.map((v,i)=>`<td>${i===2?`<span class="specimen-code">${esc(v||'—')}</span>`:esc(v||'—')}</td>`).join('');const conflicts=record.conflicts&&Object.keys(record.conflicts).length;return `<tr class="${isCurrent?'current-row':''}">${cells}<td>${pill(f.bass.sex,true)}</td><td>${pill(f.spradley.sex,true)}</td><td>${pill(f.kanz.sex,true)}</td><td class="final-sex">${pill(f.sex,true)}${conflicts?'<span class="conflict-indicator" title="A legacy measurement conflict requires review">Review #21</span>':''}</td></tr>`;}
+  function renderSummary(){const list=currentRecords();const currentKey=keyOf(state);const complete=list.filter(r=>femur(r).sex!==null).length;
+    $('summaryView').innerHTML=`<div class="summary-heading"><div><div class="summary-counter">${list.length} specimen${list.length===1?'':'s'} <span class="count-divider">·</span> ${complete} with final result</div><p class="sub">Selected context: <strong>${esc(contextName())}</strong>. Source worksheet: <strong>Femur</strong>. Columns and order: Locus · Individual · Number · Bass · Spradley · Kanz · Sex.</p></div><button type="button" class="button" id="summaryExport" ${list.length?'':'disabled'}>Export summary CSV</button></div><div class="table-wrap summary-scroll"><table class="femur-summary-table" aria-label="Automatically generated femur sex-estimation results"><thead><tr><th scope="col">Locus</th><th scope="col">Individual</th><th scope="col">Number</th><th scope="col">Bass</th><th scope="col">Spradley</th><th scope="col">Kanz</th><th scope="col">Sex</th></tr></thead><tbody>${list.length?list.map(r=>summaryRow(r,hasIdentity(state)&&keyOf(r)===currentKey)).join(''):'<tr><td colspan="7" class="empty-summary">No specimens yet. Enter measurements in Bass, Spradley or Kanz. Results will appear here automatically.</td></tr>'}</tbody></table></div><div class="summary-footer"><span><span class="dot"></span> Automatically calculated · No editable cells</span><span>Final Sex uses the original worksheet’s two-matching-votes rule.</span></div><div class="hintbox">Missing method results remain blank. If two methods agree on F or M, that classification appears in Sex even when the third method has not been completed, exactly as in the Excel formula. If all three have results but no majority, the result is Indeterminate.</div>`;
+    const exportBtn=$('summaryExport');if(exportBtn)exportBtn.addEventListener('click',()=>exportSummaryCSV());
+  }
+  function loadRecord(record){selectedId=record.id==='__draft__'?null:record.id;state=norm(record);persistWorkspace();for(const name of ['individual','number','locus'])$(name).value=state[name]||'';renderTab();markSave('Loaded specimen');}
+  function reset(){state=empty();selectedId=null;persistWorkspace();for(const name of ['individual','number','locus'])$(name).value='';renderTab();renderSaved();markSave('New specimen · Not saved yet');toast('New specimen ready.');$('individual').focus();}
+  function saveExplicit(){if(!hasIdentity(state)){toast('Individual and Number are required to save a specimen.',true);return;}persistDraftAndMaybeRecord();toast('Specimen is saved locally. The summary is already up to date.');}
+  function renderSaved(){const body=$('savedBody');body.replaceChildren();$('savedCount').textContent='('+saved.length+')';refreshContextBar();$('emptySaved').hidden=saved.length>0;
+    for(const r of saved){const f=femur(r),tr=document.createElement('tr');tr.innerHTML=`<td>${esc(r.individual)}</td><td>${esc(r.number)}</td><td>${pill(f.bass.sex,true)}</td><td>${pill(f.spradley.sex,true)}</td><td>${pill(f.kanz.sex,true)}</td><td>${pill(f.sex,true)}</td><td></td>`;const cell=tr.lastElementChild,controls=document.createElement('div');controls.className='actionpair';const open=document.createElement('button');open.type='button';open.className='button mini';open.textContent='Open';open.addEventListener('click',()=>{active='bass';loadRecord(r);window.scrollTo({top:0,behavior:'smooth'});toast('Specimen loaded. Measurements are shared across tabs.');});const remove=document.createElement('button');remove.type='button';remove.className='button mini tertiary';remove.textContent='Delete';remove.addEventListener('click',()=>{if(!confirm('Delete '+r.individual+' / '+r.number+' from local records?'))return;saved=saved.filter(x=>x.id!==r.id);persistWorkspace();if(selectedId===r.id){selectedId=null;state=empty();persistWorkspace();for(const name of ['individual','number','locus'])$(name).value='';renderTab();}renderSaved();toast('Local specimen deleted.');});controls.append(open,remove);cell.append(controls);body.append(tr);}
+    $('exportCSV').disabled=!saved.length;$('clearAll').disabled=!saved.length;
+  }
+  function csvEscape(v){let s=String(v??'');if(/^\s*[=+@-]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"';}
+  function download(rows,name){const lines=rows.map(row=>row.map(csvEscape).join(',')).join('\r\n');const blob=new Blob(['\ufeff'+lines],{type:'text/csv;charset=utf-8'});const href=URL.createObjectURL(blob),a=document.createElement('a');a.href=href;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(href),2000);toast('CSV export created.');}
+  function exportSummaryCSV(){download([['Locus','Individual','Number','Bass','Spradley','Kanz','Sex'],...currentRecords().map(r=>{const f=femur(r);return[r.locus,r.individual,r.number,f.bass.sex||'',f.spradley.sex||'',f.kanz.sex||'',f.sex||''];})],scopedFilename('femur_summary.csv'));}
+  function exportFullCSV(){const codes=['1','2','18','19','20','21','6or7','7'];download([['Locus','Individual','Number',...codes.map(c=>fields[c].name),'Kanz MHD source','Kanz model','Bass','Spradley score','Spradley sex','Kanz score','Kanz sex','Femur sex'],...saved.map(r=>{const f=femur(r);return[r.locus,r.individual,r.number,...codes.map(c=>r.measurements?.[c]||''),r.kanzHeadSource,r.kanzModel,f.bass.sex||'',f.spradley.score??'',f.spradley.sex||'',f.kanz.score??'',f.kanz.sex||'',f.sex||''];})],scopedFilename('femur_all_measurements.csv'));}
+  function useExample(which){if(activeContextId!==DEFAULT_CONTEXT){toast('Demo examples are available under RMIL / Tomb 3 only.',true);return;}selectedId=null;const m=which==='m';state={...empty(),individual:m?'Demo A':'Demo B',number:m?'DEMO 001':'DEMO 002',measurements:m?{'19':'46.0','21':'80.0','2':'468','1':'478','18':'46.3','6or7':'27.5','7':'25.5','20':'158'}:{'19':'40.0','21':'72.0','2':'398','1':'406','18':'40.3','6or7':'24.0','7':'23.8','20':'131'},kanzModel:'Optimal',kanzHeadSource:'18'};
+    for(const name of ['individual','number','locus'])$(name).value=state[name]||'';
+    // Existing saved example is opened rather than overwritten with imported test values.
+    const prior=saved.find(r=>keyOf(r)===keyOf(state));if(prior){selectedId=prior.id;state=norm(prior);for(const name of ['individual','number','locus'])$(name).value=state[name]||'';}else persistDraftAndMaybeRecord();persistWorkspace();renderTab();renderSaved();toast(prior?'Existing saved example opened.':'Demo example loaded. One shared value is used for measurement #21 in all methods.');}
+  function openImage(code){activeImage=code;const f=fields[code];$('imageTitle').textContent=f.name;$('imageCode').textContent='Measurement #'+f.code+' · '+f.used;$('imageMessage').textContent='';renderImage();if(!$('imageModal').open)$('imageModal').showModal();}
+  function renderImage(){const container=$('imageWell');container.replaceChildren();if(images[activeImage]){const img=document.createElement('img');img.src=images[activeImage];img.alt='Reference image for '+fields[activeImage].name;container.append(img);$('removeImage').disabled=false;}else{const p=document.createElement('div');p.className='image-placeholder';p.innerHTML='<span class="icon-lg" aria-hidden="true">▧</span>No reference image added yet.<br>Use “Add image” to attach one for this measurement.';container.append(p);$('removeImage').disabled=true;}}
+  $('imageUpload').addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;if(!['image/png','image/jpeg','image/webp'].includes(f.type)||f.size>700000){$('imageMessage').textContent='Use a PNG, JPEG or WebP image smaller than 700 KB.';e.target.value='';return;}const reader=new FileReader();reader.onload=()=>{images[activeImage]=reader.result;$('imageMessage').textContent=put(IMAGE_STORE,images)?'Reference image saved in this browser.':'Could not save image to browser storage.';renderImage();};reader.readAsDataURL(f);e.target.value='';});
+  $('removeImage').addEventListener('click',()=>{delete images[activeImage];put(IMAGE_STORE,images);renderImage();$('imageMessage').textContent='Reference removed from this browser.';});
+  $('closeModal').addEventListener('click',()=>$('imageModal').close());$('imageModal').addEventListener('click',e=>{if(e.target===$('imageModal'))$('imageModal').close();});
+  $('methodExtras').addEventListener('click',e=>{const button=e.target.closest('[data-matrix-model]');if(!button)return;state.kanzModel=button.dataset.matrixModel;persistDraftAndMaybeRecord();renderTab();});
+  document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
+  for(const name of ['individual','number','locus'])$(name).addEventListener('input',e=>{state[name]=e.target.value;persistDraftAndMaybeRecord();if(active==='overview')renderSummary();});
+  $('newRecord').addEventListener('click',reset);$('saveRecord').addEventListener('click',saveExplicit);
+  $('sampleM').addEventListener('click',()=>useExample('m'));$('sampleF').addEventListener('click',()=>useExample('f'));
+  $('exportCSV').addEventListener('click',exportFullCSV);
+  $('clearAll').addEventListener('click',()=>{if(!confirm('Delete all specimens in '+contextName()+'? Other sites and contexts will not be affected.'))return;saved=[];persistWorkspace();reset();renderSaved();toast('Local records cleared.');});
+  // Site / context management. A specimen's measurement map never crosses contexts.
+  $('siteSelect').addEventListener('change',e=>{
+    const contexts=workspaceData.contexts.filter(c=>c.siteId===e.target.value);
+    if(contexts.length)switchContext(contexts[0].id);
+  });
+  $('contextSelect').addEventListener('change',e=>switchContext(e.target.value));
+  function closeCreationPanels(){
+    $('siteDialog').open=false;
+    $('contextDialog').open=false;
+  }
+  // Native HTML <details> handles expanding/collapsing in every modern browser.
+  // JavaScript only improves focus management; it is not required to reveal the forms.
+  $('siteDialog').addEventListener('toggle',()=>{
+    if($('siteDialog').open){
+      $('siteDialogError').textContent='';
+      $('siteCodeInput').focus({preventScroll:true});
+    }
+  });
+  $('contextDialog').addEventListener('toggle',()=>{
+    if($('contextDialog').open){
+      $('contextDialogError').textContent='';
+      $('contextDialogSite').textContent='Site · '+(currentSite()?.code||'');
+      $('contextNameInput').focus({preventScroll:true});
+    }
+  });
+  document.querySelectorAll('[data-close-dialog]').forEach(b=>b.addEventListener('click',closeCreationPanels));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'&&($('siteDialog').open||$('contextDialog').open))closeCreationPanels();
+  });
+  $('siteCreateForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const code=$('siteCodeInput').value.trim().replace(/\s+/g,' ').toUpperCase();
+    const name=$('siteContextInput').value.trim().replace(/\s+/g,' ');
+    if(!code||!name){$('siteDialogError').textContent='Enter both a site code and its first context.';return;}
+    if(workspaceData.sites.some(s=>s.code.toLocaleLowerCase()===code.toLocaleLowerCase())){$('siteDialogError').textContent='This site already exists. Select it and add a context instead.';return;}
+    persistWorkspace();
+    const siteId=uid(),contextId=uid();
+    workspaceData.sites.push({id:siteId,code});
+    workspaceData.contexts.push({id:contextId,siteId,name});
+    workspaceData.recordsByContext[contextId]=[];
+    workspaceData.draftsByContext[contextId]=empty();
+    closeCreationPanels();switchContext(contextId);
+    toast(storageFailure?'Site created for this session, but browser storage is blocked. Use Backup all before closing.':'Site '+code+' created. '+name+' is now selected.',storageFailure);
+  });
+  $('contextCreateForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const name=$('contextNameInput').value.trim().replace(/\s+/g,' ');
+    if(!name){$('contextDialogError').textContent='Enter a tomb or context name.';return;}
+    const siteId=currentSite().id;
+    if(workspaceData.contexts.some(c=>c.siteId===siteId&&c.name.toLocaleLowerCase()===name.toLocaleLowerCase())){$('contextDialogError').textContent='This context already exists for the selected site.';return;}
+    persistWorkspace();
+    const id=uid();workspaceData.contexts.push({id,siteId,name});
+    workspaceData.recordsByContext[id]=[];workspaceData.draftsByContext[id]=empty();
+    closeCreationPanels();switchContext(id);
+    toast(storageFailure?'Context created for this session, but browser storage is blocked. Use Backup all before closing.':'Context '+name+' created under '+(currentSite()?.code||'site')+'.',storageFailure);
+  });
+  $('backupWorkspace').addEventListener('click',()=>{
+    persistWorkspace();
+    const backup={type:'femur-sex-estimation-backup',version:1,exportedAt:new Date().toISOString(),workspace:workspaceData,referenceImages:images};
+    const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob);const a=document.createElement('a');
+    a.href=url;a.download='sex_estimation_all_sites_backup.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
+    toast('All sites and contexts backed up to JSON.');
+  });
+  $('restoreWorkspace').addEventListener('change',async e=>{
+    const file=e.target.files?.[0];e.target.value='';if(!file)return;
+    try{
+      if(file.size>15_000_000)throw Error('Backup is too large (max 15 MB).');
+      const payload=JSON.parse(await file.text());const w=payload.workspace;
+      if(payload.type!=='femur-sex-estimation-backup'||!w||!Array.isArray(w.sites)||!Array.isArray(w.contexts)||!w.sites.length||!w.contexts.length||!w.recordsByContext||typeof w.recordsByContext!=='object'||!w.contexts.some(c=>c.id===w.activeContextId)||w.contexts.some(c=>!w.sites.some(s=>s.id===c.siteId))){throw Error('Not a valid workspace backup.');}
+      if(!confirm('Restore this backup and REPLACE all locally stored sites, contexts and specimens? Save a current backup first if needed.'))return;
+      workspaceData=w;activeContextId=w.activeContextId;
+      saved=(w.recordsByContext[activeContextId]||[]).map(r=>({...norm(r),id:r.id||uid()}));
+      state=norm(w.draftsByContext?.[activeContextId]);
+      selectedId=null;
+      if(hasIdentity(state)){const match=saved.find(r=>keyOf(r)===keyOf(state));if(match)selectedId=match.id;}
+      images=(payload.referenceImages&&typeof payload.referenceImages==='object')?payload.referenceImages:{};
+      put(IMAGE_STORE,images);persistWorkspace();
+      for(const name of ['individual','number','locus'])$(name).value=state[name]||'';
+      refreshContextBar();renderTab();renderSaved();toast('Workspace restored successfully.');
+    }catch(err){alert('Could not restore backup: '+err.message);}
+  });
+  // The draft may correspond to an auto-saved record from a previous session.
+  if(hasIdentity(state)){const match=saved.find(r=>keyOf(r)===keyOf(state));if(match)selectedId=match.id;}
+  for(const name of ['individual','number','locus'])$(name).value=state[name]||'';
+  refreshContextBar();renderTab();renderSaved();markSave(selectedId?'Saved automatically in this browser':'Enter Individual and Number to save automatically');
+})();
+</script>
+</body>
+</html>
