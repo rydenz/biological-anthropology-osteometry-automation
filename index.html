@@ -136,23 +136,23 @@
 </style>
 </head>
 <body>
-<header class="topbar"><div class="wrap toprow"><div class="brand"><div class="symbol" aria-hidden="true">F</div><div><div class="brandstrong">Sex Estimation</div><div class="brandsub"><span class="brand-meta-label">Site</span><span id="workspaceSiteName">RMIL</span><span class="brand-meta-separator" aria-hidden="true">/</span><span class="brand-meta-label">Archaeological Context</span><span id="workspaceContextName">Tomb 3</span></div></div></div><span class="pill">LOCAL PROTOTYPE · SOURCE FORMULAS</span></div></header>
+<header class="topbar"><div class="wrap toprow"><div class="brand"><div class="symbol" aria-hidden="true">F</div><div><div class="brandstrong">Sex Estimation</div><div class="brandsub"><span class="brand-meta-label">Site</span><span id="workspaceSiteName">RMIL</span><span class="brand-meta-separator" aria-hidden="true">/</span><span class="brand-meta-label">Context</span><span id="workspaceContextName">Tomb 3</span></div></div></div><span class="pill">LOCAL PROTOTYPE · SOURCE FORMULAS</span></div></header>
 <section class="context-bar wrap" aria-label="Site and excavation context">
   <div class="context-field"><label for="siteSelect">Site</label><select id="siteSelect" aria-label="Select archaeological site"></select></div>
-  <div class="context-field"><label for="contextSelect">Archaeological Context</label><select id="contextSelect" aria-label="Select tomb or excavation context"></select></div>
+  <div class="context-field"><label for="contextSelect">Context</label><select id="contextSelect" aria-label="Select tomb or excavation context"></select></div>
   <details id="siteDialog" name="create-context" class="context-create-item">
     <summary class="button tertiary context-add" id="addSite">+ Site</summary>
     <div class="create-form-holder"><form id="siteCreateForm" novalidate>
   <div class="dialog-head"><div><div class="eyebrow">Workspace structure</div><h2 id="siteDialogTitle">Add archaeological site</h2></div><button type="button" class="close" data-close-dialog="siteDialog" aria-label="Close">×</button></div>
   <div class="dialog-body"><div class="control"><label for="siteCodeInput">Site code</label><input id="siteCodeInput" autocomplete="off" placeholder="e.g. MOTZA" maxlength="40" required><small>Short identifier shown in the workspace title.</small></div>
-  <div class="control"><label for="siteContextInput">First archaeological context</label><input id="siteContextInput" autocomplete="off" placeholder="e.g. Tomb 1 or Burial 2" maxlength="90" required><small>Each context gets an independent specimen dataset.</small></div>
+  <div class="control"><label for="siteContextInput">First context</label><input id="siteContextInput" autocomplete="off" placeholder="e.g. Tomb 1 or Burial 2" maxlength="90" required><small>Each context gets an independent specimen dataset.</small></div>
   <p class="dialog-error" id="siteDialogError" role="alert"></p><button class="button primary full-button" type="submit">Create site and context</button></div>
 </form></div>
   </details>
   <details id="contextDialog" name="create-context" class="context-create-item">
     <summary class="button tertiary context-add" id="addContext">+ Context</summary>
     <div class="create-form-holder"><form id="contextCreateForm" novalidate>
-  <div class="dialog-head"><div><div class="eyebrow" id="contextDialogSite">Selected site</div><h2 id="contextDialogTitle">Add archaeological context</h2></div><button type="button" class="close" data-close-dialog="contextDialog" aria-label="Close">×</button></div>
+  <div class="dialog-head"><div><div class="eyebrow" id="contextDialogSite">Selected site</div><h2 id="contextDialogTitle">Add context</h2></div><button type="button" class="close" data-close-dialog="contextDialog" aria-label="Close">×</button></div>
   <div class="dialog-body"><div class="control"><label for="contextNameInput">Context name</label><input id="contextNameInput" autocomplete="off" placeholder="e.g. Tomb 4, Burial 7, Area A" maxlength="90" required></div>
   <p class="dialog-error" id="contextDialogError" role="alert"></p><button class="button primary full-button" type="submit">Create context</button></div>
 </form></div>
