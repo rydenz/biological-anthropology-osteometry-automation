@@ -219,7 +219,7 @@
   <nav class="analysis-breadcrumbs" aria-label="Current skeletal element"><span>Skeletal elements</span><span class="breadcrumb-separator" aria-hidden="true">/</span><span class="breadcrumb-current">Femur</span></nav>
   <div class="analysis-heading-row">
     <div><div class="analysis-overline">Skeletal element</div><h1 id="pageElement">Femur</h1></div>
-    <div class="analysis-method" aria-live="polite"><span class="analysis-overline">Selected method</span><strong class="analysis-method-name" id="pageMethod">Bass</strong></div>
+    <div class="analysis-method" aria-live="polite"><span class="analysis-overline" id="methodLabel">Selected method</span><strong class="analysis-method-name" id="pageMethod">Bass</strong></div>
   </div>
 </header>
 <div class="tabs-outer"><nav class="tabs" id="tabs" aria-label="Femur analysis methods" role="tablist"><button class="tab active" role="tab" aria-selected="true" data-tab="bass" id="tab-bass">Bass</button><button class="tab" role="tab" aria-selected="false" data-tab="spradley" id="tab-spradley">Spradley</button><button class="tab" role="tab" aria-selected="false" data-tab="kanz" id="tab-kanz">Kanz</button><button class="tab" role="tab" aria-selected="false" data-tab="overview" id="tab-overview">Femur <span class="tab-count">Summary</span></button></nav></div>
@@ -235,7 +235,7 @@
     <nav class="analysis-breadcrumbs" aria-label="Current skeletal element"><span>Skeletal elements</span><span class="breadcrumb-separator" aria-hidden="true">/</span><span class="breadcrumb-current">Mandible</span></nav>
     <div class="analysis-heading-row">
       <div><div class="analysis-overline">Skeletal element</div><h1>Mandible</h1></div>
-      <div class="analysis-method"><span class="analysis-overline">Selected method</span><span class="analysis-method-name is-pending">Not configured</span></div>
+      <div class="analysis-method"><span class="analysis-overline">Methods</span><span class="analysis-method-name is-pending">Not configured</span></div>
     </div>
   </header>
   <div class="mandible-spaced">
@@ -571,7 +571,7 @@
     holder.querySelectorAll('[data-resolve]').forEach(el=>el.addEventListener('click',e=>resolveConflict(e.currentTarget.dataset.code,e.currentTarget.dataset.resolve)));
   }
   function setTab(name){active=name;renderTab();}
-  function renderTab(){const titleByTab={bass:'Bass',spradley:'Spradley',kanz:'Kanz',overview:'Summary'};const pageTitle='Femur · '+(titleByTab[active]||'Bass');$('pageMethod').textContent=titleByTab[active]||'Bass';document.title='Sex Estimation | '+(currentSite()?.code||'Site')+' / '+(currentContext()?.name||'Context')+' | '+pageTitle;document.querySelectorAll('.tab').forEach(b=>{const on=b.dataset.tab===active;b.classList.toggle('active',on);b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;});
+  function renderTab(){const titleByTab={bass:'Bass',spradley:'Spradley',kanz:'Kanz',overview:'Summary'};const pageTitle='Femur · '+(titleByTab[active]||'Bass');$('pageMethod').textContent=titleByTab[active]||'Bass';$('methodLabel').textContent=active==='overview'?'Current view':'Selected method';document.title='Sex Estimation | '+(currentSite()?.code||'Site')+' / '+(currentContext()?.name||'Context')+' | '+pageTitle;document.querySelectorAll('.tab').forEach(b=>{const on=b.dataset.tab===active;b.classList.toggle('active',on);b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;});
     const summary=active==='overview';$('workspace').classList.toggle('summary-active',summary);$('identityCard').hidden=summary;$('savedSection').hidden=summary;$('count').hidden=summary;
     $('measurementFields').hidden=summary;$('methodExtras').hidden=summary;$('summaryView').hidden=!summary;$('panelFooter').hidden=summary;
     if(summary){$('panelKicker').textContent='Automatically generated · Source columns A–G';$('panelTitle').textContent='Femur · Sex estimation summary';$('panelSubtitle').textContent='Read-only table with the same column structure as the Femur worksheet. Every method is calculated from the single specimen record; no entry is needed here.';$('panelSubtitle').hidden=false;renderSummary();return;}
