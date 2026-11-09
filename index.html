@@ -165,6 +165,20 @@
 @media(max-width:1100px){.skeletal-layout{grid-template-columns:160px minmax(0,1fr);gap:14px}}
 @media(max-width:830px){.skeletal-layout{display:block}.skeletal-sidebar{position:static;margin-bottom:10px}.skeletal-sidebar-title{margin-bottom:8px}.skeletal-nav{flex-direction:row}.skeletal-nav-button{width:auto;min-width:115px}.skeletal-content .pagehead,.mandible-view .pagehead{padding-top:19px}.mandible-view .person-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:530px){.mandible-view .person-grid{grid-template-columns:1fr}.skeletal-nav-button{flex:1}.mandible-view .card{padding:16px}}
+
+/* Quiet, consistent hierarchy: skeletal element first, selected method second. */
+.analysis-header{padding:17px 0 23px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.analysis-breadcrumbs{display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.12px}
+.analysis-breadcrumbs .breadcrumb-separator{color:#5d6878;font-size:12px}
+.analysis-breadcrumbs .breadcrumb-current{color:#c0cbda}
+.analysis-heading-row{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.analysis-heading-row .analysis-overline{font-size:10px;font-weight:740;letter-spacing:1.15px;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.analysis-heading-row h1{margin:0;font-size:32px;line-height:1.15;font-weight:720;letter-spacing:-1.05px}
+.analysis-method{border-left:1px solid #384251;padding:2px 0 2px 16px;min-width:155px;display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.analysis-method .analysis-overline{margin:0}
+.analysis-method-name{font-size:18px;line-height:1.25;letter-spacing:-.3px;color:var(--ink);font-weight:680}
+.analysis-method-name.is-pending{color:var(--secondary);font-size:13px;font-weight:520;letter-spacing:0}
+@media(max-width:530px){.analysis-header{padding-top:15px;padding-bottom:18px}.analysis-heading-row h1{font-size:28px}.analysis-method{min-width:auto}.analysis-method-name{font-size:16px}}
 </style>
 </head>
 <body>
@@ -201,7 +215,13 @@
   </nav>
 </aside>
 <div class="skeletal-content" id="femurView">
-<div class="pagehead"><div class="kicker">Morphometric analysis</div><h1 id="pageTitle">Femur · Bass</h1></div>
+<header class="analysis-header">
+  <nav class="analysis-breadcrumbs" aria-label="Current skeletal element"><span>Skeletal elements</span><span class="breadcrumb-separator" aria-hidden="true">/</span><span class="breadcrumb-current">Femur</span></nav>
+  <div class="analysis-heading-row">
+    <div><div class="analysis-overline">Skeletal element</div><h1 id="pageElement">Femur</h1></div>
+    <div class="analysis-method" aria-live="polite"><span class="analysis-overline">Selected method</span><strong class="analysis-method-name" id="pageMethod">Bass</strong></div>
+  </div>
+</header>
 <div class="tabs-outer"><nav class="tabs" id="tabs" aria-label="Femur analysis methods" role="tablist"><button class="tab active" role="tab" aria-selected="true" data-tab="bass" id="tab-bass">Bass</button><button class="tab" role="tab" aria-selected="false" data-tab="spradley" id="tab-spradley">Spradley</button><button class="tab" role="tab" aria-selected="false" data-tab="kanz" id="tab-kanz">Kanz</button><button class="tab" role="tab" aria-selected="false" data-tab="overview" id="tab-overview">Femur <span class="tab-count">Summary</span></button></nav></div>
 <main>
 <section class="card person-card" id="identityCard" aria-label="Specimen identity"><div class="secttop identity-actions"><div class="controlsrow"><button id="newRecord" class="button tertiary" type="button">+ New specimen</button><button id="saveRecord" class="button primary" type="button">Save specimen</button></div></div><div class="person-grid"><div class="control"><label for="individual">Individual</label><input id="individual" type="text" autocomplete="off" placeholder="e.g. F1"></div><div class="control"><label for="number">Number <small>· Inscribed bone ID</small></label><input id="number" type="text" autocomplete="off" placeholder="e.g. DEMO 001"></div><div class="control"><label for="locus">Locus <small>· Optional</small></label><input id="locus" type="text" autocomplete="off" placeholder="Enter locus"></div></div><div class="person-footer"><div class="example-row" id="exampleRow"><span class="mutedlabel">Load example</span><button class="button mini" id="sampleM" type="button">Demo A · DEMO 001</button><button class="button mini" id="sampleF" type="button">Demo B · DEMO 002</button></div><span class="notice" id="autosaveStatus">Changes stay in this browser</span></div><div class="toast" role="status" aria-live="polite" id="toast"></div></section>
@@ -211,7 +231,13 @@
 <p class="foot">The Bass, Spradley and Kanz calculation methods are implemented for research prototyping. Compare all results against independently validated source formulas before research use. Demonstration specimens are synthetic.</p>
 </main></div>
 <section class="mandible-view" id="mandibleView" hidden aria-label="Mandible workspace">
-  <div class="pagehead"><div class="kicker">Skeletal element</div><h1>Mandible</h1></div>
+  <header class="analysis-header">
+    <nav class="analysis-breadcrumbs" aria-label="Current skeletal element"><span>Skeletal elements</span><span class="breadcrumb-separator" aria-hidden="true">/</span><span class="breadcrumb-current">Mandible</span></nav>
+    <div class="analysis-heading-row">
+      <div><div class="analysis-overline">Skeletal element</div><h1>Mandible</h1></div>
+      <div class="analysis-method"><span class="analysis-overline">Selected method</span><span class="analysis-method-name is-pending">Not configured</span></div>
+    </div>
+  </header>
   <div class="mandible-spaced">
     <section class="card" aria-label="Mandible specimen identification">
       <div class="secttop"><div><div class="eyebrow">Specimen</div><h2>Mandible · Identity</h2></div>
@@ -545,7 +571,7 @@
     holder.querySelectorAll('[data-resolve]').forEach(el=>el.addEventListener('click',e=>resolveConflict(e.currentTarget.dataset.code,e.currentTarget.dataset.resolve)));
   }
   function setTab(name){active=name;renderTab();}
-  function renderTab(){const titleByTab={bass:'Bass',spradley:'Spradley',kanz:'Kanz',overview:'Summary'};const pageTitle='Femur · '+(titleByTab[active]||'Bass');$('pageTitle').textContent=pageTitle;document.title='Sex Estimation | '+(currentSite()?.code||'Site')+' / '+(currentContext()?.name||'Context')+' | '+pageTitle;document.querySelectorAll('.tab').forEach(b=>{const on=b.dataset.tab===active;b.classList.toggle('active',on);b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;});
+  function renderTab(){const titleByTab={bass:'Bass',spradley:'Spradley',kanz:'Kanz',overview:'Summary'};const pageTitle='Femur · '+(titleByTab[active]||'Bass');$('pageMethod').textContent=titleByTab[active]||'Bass';document.title='Sex Estimation | '+(currentSite()?.code||'Site')+' / '+(currentContext()?.name||'Context')+' | '+pageTitle;document.querySelectorAll('.tab').forEach(b=>{const on=b.dataset.tab===active;b.classList.toggle('active',on);b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;});
     const summary=active==='overview';$('workspace').classList.toggle('summary-active',summary);$('identityCard').hidden=summary;$('savedSection').hidden=summary;$('count').hidden=summary;
     $('measurementFields').hidden=summary;$('methodExtras').hidden=summary;$('summaryView').hidden=!summary;$('panelFooter').hidden=summary;
     if(summary){$('panelKicker').textContent='Automatically generated · Source columns A–G';$('panelTitle').textContent='Femur · Sex estimation summary';$('panelSubtitle').textContent='Read-only table with the same column structure as the Femur worksheet. Every method is calculated from the single specimen record; no entry is needed here.';$('panelSubtitle').hidden=false;renderSummary();return;}
