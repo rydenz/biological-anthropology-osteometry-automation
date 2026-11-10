@@ -1,6 +1,6 @@
 # Biological Anthropology - Osteometry Automation
 
-A local, browser-based prototype for biological anthropology osteometry automation, currently focused on osteometric sex estimation. The app has independent **Femur**, **Humerus**, and **Mandible** workspaces.
+A local, browser-based prototype for biological anthropology osteometry automation, currently focused on osteometric sex estimation. The app has independent **Femur**, **Humerus**, and **Mandible** workspaces, plus separate specimen-record prototypes for additional skeletal elements.
 
 - **Femur:** Bass, Spradley, Kanz and automated summary.
 - **Humerus:** shared measurements, Bass reference table, the Spradley discriminant score from the source workbook and an automatic review summary.
@@ -13,14 +13,14 @@ Open `index.html` in a desktop browser. No build step, server, npm dependencies,
 ## Current behavior
 
 - Site and Context selection, with context-specific specimen records.
-- Skeletal-element sidebar to switch between Femur, Humerus and Mandible.
-- Independent specimen records for each skeletal element, with site/context scoping.
+- Anatomically grouped sidebar: **Cranial** (Cranium, Mandible), **Upper Body** (Clavicle, Humerus, Radius, Ulna), and **Lower Body** (Pelvis, Femur, Patella, Tibia, Fibula, Calcaneus).
+- Independent specimen records for each skeletal element, with site/context scoping. New element prototypes capture inscribed bone ID, optional individual/locus/side, and can export CSV. No calculations are provided for new elements until protocols are verified.
 - Separate measurement inputs, results and summary views for each skeletal element.
 - Shared specimen identity and measurement values between method tabs.
 - Kanz model selection and a dynamic measurement requirement matrix.
 - Automatically populated Femur summary table.
 - Dark-mode UI.
-- Local browser storage and JSON backup / restore (including Humerus and Mandible records).
+- Local browser storage and JSON backup / restore (including Humerus, Mandible, and the additional element records).
 
 ## Research-data and validation notes
 
@@ -32,4 +32,4 @@ The repository contains **synthetic demonstration specimens**, not the source re
 
 ## Deploy
 
-This project currently consists of one static file (`index.html`). It can be hosted by any static hosting service, including GitHub Pages, after reviewing the privacy and validation notes above. Hosting does not provide server-side storage or syncing.
+The app uses static HTML, CSS, and JavaScript files (`index.html`, `element-methods.css`, `element-methods.js`, and `skeletal-element-prototypes.js`). Keep these together when serving locally or deploying to a static host such as GitHub Pages, after reviewing the privacy and validation notes above. Hosting does not provide server-side storage or syncing.
