@@ -277,7 +277,7 @@
     <button class="element-tab" type="button" data-mandible-tab="summary">Summary</button>
   </nav>
   <div class="mandible-spaced">
-    <section class="card" aria-label="Mandible specimen identification">
+    <section class="card" id="mandibleIdentityCard" aria-label="Mandible specimen identification">
       <div class="secttop"><div><div class="eyebrow">Specimen</div><h2>Mandible · Identity</h2></div>
       <div class="mandible-actions"><button class="button tertiary" type="button" id="mandibleNew">+ New specimen</button><button class="button primary" type="button" id="mandibleSave">Save specimen</button></div></div>
       <div class="person-grid">
@@ -288,7 +288,7 @@
       <p class="mandible-status" role="status" aria-live="polite" id="mandibleStatus">Records are stored separately from Femur.</p>
     </section>
     <section class="card" aria-label="Mandible measurement methods"><div id="mandibleMethodBody"></div></section>
-    <section class="card" aria-label="Saved mandible specimens">
+    <section class="card" id="mandibleRecordsCard" aria-label="Saved mandible specimens">
       <div class="secttop"><div><div class="eyebrow">Local records</div><h2>Mandible specimens <span id="mandibleCount" style="color:var(--muted);font-size:13px;font-weight:500">(0)</span></h2></div><button id="mandibleExport" class="button tertiary" type="button">Export CSV</button></div>
       <div class="table-wrap"><table class="mandible-table"><thead><tr><th>Individual</th><th>Number</th><th>Locus</th><th>Actions</th></tr></thead><tbody id="mandibleRows"></tbody></table><div class="mandible-empty" id="mandibleEmpty">No mandible specimens saved in this context.</div></div>
     </section>
@@ -683,8 +683,13 @@
   $('mandibleSave').addEventListener('click',saveMandible);
   $('mandibleExport').addEventListener('click',()=>{
     if(!mandibleSaved.length)return;
-    download([['Individual','Number','Locus'],...mandibleSaved.map(row=>[row.individual,row.number,row.locus])],scopedFilename('mandible_specimens.csv'));
-    mandibleNotice('Mandible records exported as CSV.');
+    const codes=['d','e','f','g','h','i','j','k','l'];
+    download([['Locus','Individual','Number','FD model',...codes.map(code=>'Excel '+code.toUpperCase()),'Score','Probability','Sex'],
+      ...mandibleSaved.map(row=>{
+        const result=window.osteometryExtension?.mandibleResult?.(row)||{};
+        return [row.locus,row.individual,row.number,row.model,...codes.map(code=>row.measurements?.[code]||''),result.score??'',result.probability??'',result.sex||''];
+      })],scopedFilename('mandible_measurements.csv'));
+    mandibleNotice('Mandible measurements and results exported as CSV.');
   });
   document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
   for(const name of ['individual','number','locus'])$(name).addEventListener('input',e=>{state[name]=e.target.value;persistDraftAndMaybeRecord();if(active==='overview')renderSummary();});
