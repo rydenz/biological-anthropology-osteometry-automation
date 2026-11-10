@@ -136,7 +136,7 @@
 
 /* Skeletal element navigation: each element has its own working area. */
 .skeletal-layout{max-width:1510px;display:grid;grid-template-columns:194px minmax(0,1fr);align-items:start;gap:24px;padding-top:18px}
-.skeletal-sidebar{position:sticky;top:18px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:13px;min-width:0}
+.skeletal-sidebar{position:sticky;top:18px;max-height:calc(100vh - 36px);overflow-y:auto;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:13px;min-width:0;scrollbar-width:thin}
 .skeletal-sidebar-title{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);font-weight:750;margin:4px 8px 12px}
 .skeletal-nav{display:flex;flex-direction:column;gap:5px}
 .skeletal-nav-button{background:transparent;border:1px solid transparent;color:var(--secondary);padding:12px 11px;border-radius:10px;width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left;font-size:13px;font-weight:670}
@@ -179,6 +179,24 @@
 .analysis-method-name{font-size:18px;line-height:1.25;letter-spacing:-.3px;color:var(--ink);font-weight:680}
 .analysis-method-name.is-pending{color:var(--secondary);font-size:13px;font-weight:520;letter-spacing:0}
 @media(max-width:530px){.analysis-header{padding-top:15px;padding-bottom:18px}.analysis-heading-row h1{font-size:28px}.analysis-method{min-width:auto}.analysis-method-name{font-size:16px}}
+
+/* Anatomical order from cranial to caudal, grouped for quick scanning. */
+.skeletal-nav-group{display:flex;flex-direction:column;gap:3px}
+.skeletal-nav-group+.skeletal-nav-group{border-top:1px solid var(--line-soft);padding-top:12px;margin-top:9px}
+.skeletal-nav-group-title{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1.15px;font-weight:760;margin:5px 10px 7px}
+.skeletal-nav-group .skeletal-nav-button{padding:9px 11px;font-size:12px}
+#otherElementView .card{padding:22px}
+#otherElementView .person-grid{margin-top:17px}
+#otherElementView .mandible-note{margin-top:12px}
+@media(max-width:830px){
+ .skeletal-sidebar{max-height:none;overflow-x:auto;overflow-y:hidden}
+ .skeletal-nav{display:flex;align-items:start;gap:12px}
+ .skeletal-nav-group{flex:0 0 145px}
+ .skeletal-nav-group+.skeletal-nav-group{margin:0;border:0;border-left:1px solid var(--line-soft);padding-top:0;padding-left:12px}
+ .skeletal-nav-group .skeletal-nav-button{width:100%;min-width:0}
+ #otherElementView .person-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:530px){#otherElementView .person-grid{grid-template-columns:1fr}#otherElementView .card{padding:16px}}
 </style>
 <link rel="stylesheet" href="./element-methods.css">
 </head>
@@ -211,9 +229,27 @@
 <aside class="skeletal-sidebar" aria-label="Skeletal elements">
   <div class="skeletal-sidebar-title">Skeletal elements</div>
   <nav class="skeletal-nav" aria-label="Choose skeletal element">
-    <button class="skeletal-nav-button active" id="elementFemur" type="button" aria-current="page"><span>Femur</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
-    <button class="skeletal-nav-button" id="elementHumerus" type="button"><span>Humerus</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
-    <button class="skeletal-nav-button" id="elementMandible" type="button"><span>Mandible</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+    <section class="skeletal-nav-group" aria-label="Cranial">
+      <h2 class="skeletal-nav-group-title">Cranial</h2>
+      <button class="skeletal-nav-button " id="elementCranium" type="button"><span>Cranium</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+      <button class="skeletal-nav-button " id="elementMandible" type="button"><span>Mandible</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+    </section>
+    <section class="skeletal-nav-group" aria-label="Upper Body">
+      <h2 class="skeletal-nav-group-title">Upper Body</h2>
+      <button class="skeletal-nav-button " id="elementClavicle" type="button"><span>Clavicle</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+      <button class="skeletal-nav-button " id="elementHumerus" type="button"><span>Humerus</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+      <button class="skeletal-nav-button " id="elementRadius" type="button"><span>Radius</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+      <button class="skeletal-nav-button " id="elementUlna" type="button"><span>Ulna</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+    </section>
+    <section class="skeletal-nav-group" aria-label="Lower Body">
+      <h2 class="skeletal-nav-group-title">Lower Body</h2>
+      <button class="skeletal-nav-button " id="elementPelvis" type="button"><span>Pelvis</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+      <button class="skeletal-nav-button active" id="elementFemur" type="button" aria-current="page"><span>Femur</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+      <button class="skeletal-nav-button " id="elementPatella" type="button"><span>Patella</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+      <button class="skeletal-nav-button " id="elementTibia" type="button"><span>Tibia</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+      <button class="skeletal-nav-button " id="elementFibula" type="button"><span>Fibula</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+      <button class="skeletal-nav-button " id="elementCalcaneus" type="button"><span>Calcaneus</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+    </section>
   </nav>
 </aside>
 <div class="skeletal-content" id="femurView">
@@ -292,6 +328,35 @@
     <section class="card" id="mandibleRecordsCard" aria-label="Saved mandible specimens">
       <div class="secttop"><div><div class="eyebrow">Local records</div><h2>Mandible specimens <span id="mandibleCount" style="color:var(--muted);font-size:13px;font-weight:500">(0)</span></h2></div><button id="mandibleExport" class="button tertiary" type="button">Export CSV</button></div>
       <div class="table-wrap"><table class="mandible-table"><thead><tr><th>Individual</th><th>Number</th><th>Locus</th><th>Actions</th></tr></thead><tbody id="mandibleRows"></tbody></table><div class="mandible-empty" id="mandibleEmpty">No mandible specimens saved in this context.</div></div>
+    </section>
+  </div>
+</section>
+
+<section class="mandible-view" id="otherElementView" hidden aria-label="Skeletal element workspace">
+  <header class="analysis-header">
+    <nav class="analysis-breadcrumbs" aria-label="Current skeletal element"><span>Skeletal elements</span><span class="breadcrumb-separator" aria-hidden="true">/</span><span class="breadcrumb-current" id="otherBreadcrumb">Pelvis</span></nav>
+    <div class="analysis-heading-row"><div><div class="analysis-overline">Skeletal element</div><h1 id="otherHeading">Pelvis</h1></div>
+    <div class="analysis-method"><span class="analysis-overline">Methods</span><span class="analysis-method-name is-pending">Not configured</span></div></div>
+  </header>
+  <div class="mandible-spaced">
+    <section class="card" aria-label="Bone identification">
+      <div class="secttop"><div><div class="eyebrow">Specimen</div><h2 id="otherIdentityHeading">Pelvis · Identity</h2></div>
+      <div class="mandible-actions"><button class="button tertiary" id="otherNew" type="button">+ New specimen</button><button class="button primary" id="otherSave" type="button">Save specimen</button></div></div>
+      <div class="person-grid">
+        <div class="control"><label for="otherIndividual">Individual <small>· Optional</small></label><input id="otherIndividual" autocomplete="off" placeholder="Individual identifier"></div>
+        <div class="control"><label for="otherNumber">Number <small>· Inscribed bone ID</small></label><input id="otherNumber" autocomplete="off" placeholder="Bone number"></div>
+        <div class="control"><label for="otherLocus">Locus <small>· Optional</small></label><input id="otherLocus" autocomplete="off" placeholder="Enter locus"></div>
+        <div class="control"><label for="otherSide">Side <small>· Optional</small></label><select id="otherSide"><option value="">Not recorded</option><option value="Left">Left</option><option value="Right">Right</option><option value="Unknown">Unknown</option></select></div>
+      </div>
+      <p class="mandible-status" role="status" aria-live="polite" id="otherStatus">Records are stored independently for each skeletal element and context.</p>
+    </section>
+    <section class="card" aria-label="Measurement protocols">
+      <div class="eyebrow">Osteometric methods</div><h2>Measurements</h2>
+      <div class="mandible-note"><strong>Measurement protocol pending</strong>This skeletal element has its own specimen records. Measurement definitions and analysis formulas will be added only after they are verified against the relevant source protocol.</div>
+    </section>
+    <section class="card" aria-label="Saved specimens">
+      <div class="secttop"><div><div class="eyebrow">Local records</div><h2><span id="otherRecordsHeading">Pelvis specimens</span> <span id="otherCount" style="color:var(--muted);font-size:13px;font-weight:500">(0)</span></h2></div><button id="otherExport" class="button tertiary" type="button">Export CSV</button></div>
+      <div class="table-wrap"><table class="mandible-table"><thead><tr><th>Individual</th><th>Number</th><th>Locus</th><th>Side</th><th>Actions</th></tr></thead><tbody id="otherRows"></tbody></table><div class="mandible-empty" id="otherEmpty">No specimens saved for this element in the selected context.</div></div>
     </section>
   </div>
 </section>
@@ -426,6 +491,7 @@
   let images=read(IMAGE_STORE,{});if(!images||typeof images!=='object')images={};
   let saveTimerLabel='';
   let activeElement='femur';
+  const ELEMENTS=['cranium','mandible','clavicle','humerus','radius','ulna','pelvis','femur','patella','tibia','fibula','calcaneus'];
   function currentContext(){return workspaceData.contexts.find(c=>c.id===activeContextId);}
   function currentSite(){const ctx=currentContext();return workspaceData.sites.find(s=>s.id===ctx?.siteId);}
   function contextName(){return (currentSite()?.code||'Unknown')+' · '+(currentContext()?.name||'Unknown');}
@@ -491,11 +557,12 @@
     return ok;
   }
   function setElementView(element){
-    activeElement=['femur','humerus','mandible'].includes(element)?element:'femur';
+    activeElement=ELEMENTS.includes(element)?element:'femur';
     $('femurView').hidden=activeElement!=='femur';
     $('humerusView').hidden=activeElement!=='humerus';
     $('mandibleView').hidden=activeElement!=='mandible';
-    for(const elementName of ['femur','humerus','mandible']){
+    $('otherElementView').hidden=!window.osteometryGeneral?.has(activeElement);
+    for(const elementName of ELEMENTS){
       const button=$('element'+elementName[0].toUpperCase()+elementName.slice(1));
       const selected=elementName===activeElement;
       button.classList.toggle('active',selected);
@@ -505,10 +572,11 @@
     else if(activeElement==='mandible'){
       renderMandible();
       document.title='Osteometric Analysis | '+(currentSite()?.code||'Site')+' / '+(currentContext()?.name||'Context')+' | Mandible';
-    } else {
+    } else if(activeElement==='humerus') {
       document.title='Osteometric Analysis | '+(currentSite()?.code||'Site')+' / '+(currentContext()?.name||'Context')+' | Humerus';
     }
     window.osteometryExtension?.onElementChange?.(activeElement);
+    window.osteometryGeneral?.show(activeElement);
     refreshContextBar();
   }
   function persistWorkspace(){
@@ -524,7 +592,7 @@
     $('contextSelect').innerHTML=contexts.map(c=>`<option value="${esc(c.id)}" ${c.id===ctx?.id?'selected':''}>${esc(c.name)}</option>`).join('');
     $('workspaceSiteName').textContent=site?.code||'Site';
     $('workspaceContextName').textContent=ctx?.name||'Context';
-    const contextRecords=activeElement==='mandible'?mandibleSaved:activeElement==='humerus'?(window.osteometryExtension?.getHumerusRecords?.()||[]):saved;
+    const contextRecords=activeElement==='mandible'?mandibleSaved:activeElement==='humerus'?(window.osteometryExtension?.getHumerusRecords?.()||[]):activeElement==='femur'?saved:(window.osteometryGeneral?.getRecords?.(activeElement)||[]);
     $('contextCount').textContent=contextRecords.length+' specimen'+(contextRecords.length===1?'':'s');
     $('exampleRow').hidden=!(site?.id==='site_rmil'&&ctx?.id===DEFAULT_CONTEXT);
   }
@@ -665,9 +733,7 @@
   $('closeModal').addEventListener('click',()=>$('imageModal').close());$('imageModal').addEventListener('click',e=>{if(e.target===$('imageModal'))$('imageModal').close();});
   $('methodExtras').addEventListener('click',e=>{const button=e.target.closest('[data-matrix-model]');if(!button)return;state.kanzModel=button.dataset.matrixModel;persistDraftAndMaybeRecord();renderTab();});
 
-  $('elementFemur').addEventListener('click',()=>setElementView('femur'));
-  $('elementHumerus').addEventListener('click',()=>setElementView('humerus'));
-  $('elementMandible').addEventListener('click',()=>setElementView('mandible'));
+  for(const bone of ELEMENTS) $('element'+bone[0].toUpperCase()+bone.slice(1)).addEventListener('click',()=>setElementView(bone));
   for(const field of ['individual','number','locus']){
     $('mandible'+field[0].toUpperCase()+field.slice(1)).addEventListener('input',e=>{
       mandibleState[field]=e.target.value;
@@ -756,7 +822,7 @@
   });
   $('backupWorkspace').addEventListener('click',()=>{
     persistWorkspace();persistMandible();window.osteometryExtension?.persistHumerus?.();
-    const backup={type:'femur-sex-estimation-backup',version:3,exportedAt:new Date().toISOString(),workspace:workspaceData,mandible:mandibleData,humerus:window.osteometryExtension?.exportHumerus?.()||null,referenceImages:images};
+    const backup={type:'femur-sex-estimation-backup',version:3,exportedAt:new Date().toISOString(),workspace:workspaceData,mandible:mandibleData,humerus:window.osteometryExtension?.exportHumerus?.()||null,otherElements:window.osteometryGeneral?.exportData?.()||null,referenceImages:images};
     const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
     const url=URL.createObjectURL(blob);const a=document.createElement('a');
     a.href=url;a.download='osteometry_all_sites_backup.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
@@ -774,6 +840,7 @@
         mandibleData=payload.mandible;put(MANDIBLE_KEY,mandibleData);
       }
       window.osteometryExtension?.restoreHumerus?.(payload.humerus);
+      if(payload.otherElements)window.osteometryGeneral?.restoreData?.(payload.otherElements);
       saved=(w.recordsByContext[activeContextId]||[]).map(r=>({...norm(r),id:r.id||uid()}));
       state=norm(w.draftsByContext?.[activeContextId]);
       selectedId=null;
@@ -797,5 +864,6 @@
 })();
 </script>
 <script src="./element-methods.js"></script>
+<script src="./skeletal-element-prototypes.js"></script>
 </body>
 </html>
