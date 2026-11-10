@@ -71,7 +71,7 @@ function calcMandible(rec){
  return {score,probability,sex:score<0?'Male':score>0?'Female':'Indeterminate',missing:[],unverified:false};
 }
 function fieldHTML(field,value,prefix){
- return '<div class="element-field"><div><div class="element-field-title">'+esc(field.name)+'</div><div class="element-field-code">'+esc(prefix==='humerus'?'Measurement #'+field.code:'Excel column '+field.code.toUpperCase())+'</div></div><div class="control"><label class="element-muted" for="'+prefix+'Measure'+field.code+'">mm / source units</label><input id="'+prefix+'Measure'+field.code+'" data-'+prefix+'-measure="'+esc(field.code)+'" type="number" step="any" min="0" inputmode="decimal" value="'+esc(value??'')+'" placeholder="Enter value"></div></div>';
+ return '<div class="element-field"><div><div class="element-field-title">'+esc(field.name)+'</div><div class="element-field-code">'+esc(prefix==='humerus'?'Measurement #'+field.code:'Excel column '+field.code.toUpperCase())+'</div></div><div class="control"><label class="element-muted" for="'+prefix+'Measure'+field.code+'">Measurement value</label><input id="'+prefix+'Measure'+field.code+'" data-'+prefix+'-measure="'+esc(field.code)+'" type="number" step="any" min="0" inputmode="decimal" value="'+esc(value??'')+'" placeholder="Enter value"></div></div>';
 }
 function titleHTML(kicker,title,note){
  return '<div class="element-title-line"><div><div class="eyebrow">'+esc(kicker)+'</div><h2>'+esc(title)+'</h2></div></div>'+(note?'<p class="element-muted">'+esc(note)+'</p>':'');
@@ -256,6 +256,8 @@ function renderM(){
  if(mTab==='fd')body.innerHTML=mFDHTML();
  if(mTab==='summary')body.innerHTML=mSummaryHTML();
  $('mandibleMethodName').textContent=names[mTab];
+ $('mandibleIdentityCard').hidden=mTab==='summary';
+ $('mandibleRecordsCard').hidden=mTab==='summary';
 }
 function refreshResults(){
  const hLive=$('humerusLiveResult');if(hLive)hLive.innerHTML=hSpradleyResults();
@@ -286,11 +288,6 @@ $('mandibleMethodBody').addEventListener('input',e=>{
  bridge.persistMandible();refreshResults();
 });
 $('mandibleMethodBody').addEventListener('change',e=>{if(e.target.dataset.mandibleMeasure)renderM();});
-// Add measurement/model columns to Mandible export without altering original identity exports.
-$('mandibleExport').addEventListener('click',e=>{
- if(e.defaultPrevented)return;
- // Existing identity-only export remains available from the original handler.
-});
 
 window.osteometryExtension={
  getHumerusRecords:()=>hRecords,
@@ -307,7 +304,8 @@ window.osteometryExtension={
   if(element==='humerus'){renderH();bridge.refreshContext();}
   if(element==='mandible')renderM();
  },
- renderMandible:renderM
+ renderMandible:renderM,
+ mandibleResult:calcMandible
 };
 loadHContext();
 renderM();
