@@ -180,6 +180,7 @@
 .analysis-method-name.is-pending{color:var(--secondary);font-size:13px;font-weight:520;letter-spacing:0}
 @media(max-width:530px){.analysis-header{padding-top:15px;padding-bottom:18px}.analysis-heading-row h1{font-size:28px}.analysis-method{min-width:auto}.analysis-method-name{font-size:16px}}
 </style>
+<link rel="stylesheet" href="./element-methods.css">
 </head>
 <body>
 <header class="topbar"><div class="wrap toprow"><div class="brand"><div><div class="brandstrong">Osteometric Analysis</div><div class="brandsub"><span class="brand-meta-label">Site</span><span id="workspaceSiteName">RMIL</span><span class="brand-meta-separator" aria-hidden="true">/</span><span class="brand-meta-label">Context</span><span id="workspaceContextName">Tomb 3</span></div></div></div></div></header>
@@ -758,7 +759,7 @@
     const backup={type:'femur-sex-estimation-backup',version:3,exportedAt:new Date().toISOString(),workspace:workspaceData,mandible:mandibleData,humerus:window.osteometryExtension?.exportHumerus?.()||null,referenceImages:images};
     const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
     const url=URL.createObjectURL(blob);const a=document.createElement('a');
-    a.href=url;a.download='sex_estimation_all_sites_backup.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
+    a.href=url;a.download='osteometry_all_sites_backup.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
     toast('All sites and contexts backed up to JSON.');
   });
   $('restoreWorkspace').addEventListener('change',async e=>{
@@ -795,7 +796,6 @@
   loadMandibleContext();refreshContextBar();renderTab();renderSaved();setElementView('femur');markSave(selectedId?'Saved automatically in this browser':'Enter Individual and Number to save automatically');
 })();
 </script>
-<link rel="stylesheet" href="./element-methods.css">
 <script src="./element-methods.js"></script>
 </body>
 </html>
