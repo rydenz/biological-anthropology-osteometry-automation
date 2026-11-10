@@ -211,6 +211,7 @@
   <div class="skeletal-sidebar-title">Skeletal elements</div>
   <nav class="skeletal-nav" aria-label="Choose skeletal element">
     <button class="skeletal-nav-button active" id="elementFemur" type="button" aria-current="page"><span>Femur</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
+    <button class="skeletal-nav-button" id="elementHumerus" type="button"><span>Humerus</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
     <button class="skeletal-nav-button" id="elementMandible" type="button"><span>Mandible</span><span class="skeletal-nav-indicator" aria-hidden="true"></span></button>
   </nav>
 </aside>
@@ -230,14 +231,51 @@
 <section class="card tablecard" id="savedSection"><div class="secttop"><div><div class="eyebrow">Local records</div><h2>Saved specimens <span id="savedCount" style="color:var(--muted);font-size:13px;font-weight:500">(0)</span></h2><p class="sub">Records are scoped to the selected site and tomb/context. Select a specimen to edit it in any method tab.</p></div><div class="controlsrow"><button class="button" id="exportCSV" type="button">Export CSV</button><button class="button tertiary" id="clearAll" type="button">Clear records</button></div></div><div class="table-wrap"><table><thead><tr><th>Individual</th><th>Number</th><th>Bass</th><th>Spradley</th><th>Kanz</th><th>Femur assessment</th><th>Actions</th></tr></thead><tbody id="savedBody"></tbody></table><div class="emptyline" id="emptySaved">No saved specimens yet. Load an example, or enter measurements and choose “Save specimen”.</div></div><p class="sub">Records are saved locally in this browser for the selected context. Other sites and contexts remain separate. Use Backup all to retain an independent copy. Nothing is written to the Excel workbook.</p></section>
 <p class="foot">The Bass, Spradley and Kanz calculation methods are implemented for research prototyping. Compare all results against independently validated source formulas before research use. Demonstration specimens are synthetic.</p>
 </main></div>
+
+<section class="mandible-view" id="humerusView" hidden aria-label="Humerus workspace">
+  <header class="analysis-header">
+    <nav class="analysis-breadcrumbs" aria-label="Current skeletal element"><span>Skeletal elements</span><span class="breadcrumb-separator" aria-hidden="true">/</span><span class="breadcrumb-current">Humerus</span></nav>
+    <div class="analysis-heading-row"><div><div class="analysis-overline">Skeletal element</div><h1>Humerus</h1></div><div class="analysis-method"><span class="analysis-overline" id="humerusMethodLabel">Selected method</span><strong class="analysis-method-name" id="humerusMethodName">Measurements</strong></div></div>
+  </header>
+  <nav class="element-tabs" id="humerusTabs" aria-label="Humerus analysis methods">
+    <button class="element-tab active" type="button" data-humerus-tab="measurements">Measurements</button>
+    <button class="element-tab" type="button" data-humerus-tab="bass">Bass</button>
+    <button class="element-tab" type="button" data-humerus-tab="spradley">Spradley</button>
+    <button class="element-tab" type="button" data-humerus-tab="summary">Summary</button>
+  </nav>
+  <div class="mandible-spaced">
+    <section class="card" id="humerusIdentityCard">
+      <div class="secttop"><div><div class="eyebrow">Specimen</div><h2>Humerus · Identity</h2></div>
+        <div class="mandible-actions"><button class="button tertiary" id="humerusNew" type="button">+ New specimen</button><button class="button primary" id="humerusSave" type="button">Save specimen</button></div>
+      </div>
+      <div class="person-grid">
+        <div class="control"><label for="humerusIndividual">Individual</label><input id="humerusIndividual" autocomplete="off" placeholder="e.g. H1"></div>
+        <div class="control"><label for="humerusNumber">Number <small>· Inscribed bone ID</small></label><input id="humerusNumber" autocomplete="off" placeholder="Bone number"></div>
+        <div class="control"><label for="humerusLocus">Locus <small>· Optional</small></label><input id="humerusLocus" autocomplete="off" placeholder="Enter locus"></div>
+      </div>
+      <p class="mandible-status" role="status" id="humerusStatus">Specimens are stored separately from Femur and Mandible.</p>
+    </section>
+    <section class="card" id="humerusMethodCard"><div id="humerusMethodBody"></div></section>
+    <section class="card" id="humerusRecordsCard">
+      <div class="secttop"><div><div class="eyebrow">Local records</div><h2>Humerus specimens <span id="humerusCount" style="color:var(--muted);font-size:13px;font-weight:500">(0)</span></h2></div>
+      <button class="button tertiary" id="humerusExport" type="button">Export CSV</button></div>
+      <div class="table-wrap"><table class="mandible-table"><thead><tr><th>Individual</th><th>Number</th><th>Measurements</th><th>Spradley score</th><th>Actions</th></tr></thead><tbody id="humerusRows"></tbody></table><div class="mandible-empty" id="humerusEmpty">No humerus specimens saved in this context.</div></div>
+    </section>
+  </div>
+</section>
 <section class="mandible-view" id="mandibleView" hidden aria-label="Mandible workspace">
   <header class="analysis-header">
     <nav class="analysis-breadcrumbs" aria-label="Current skeletal element"><span>Skeletal elements</span><span class="breadcrumb-separator" aria-hidden="true">/</span><span class="breadcrumb-current">Mandible</span></nav>
     <div class="analysis-heading-row">
       <div><div class="analysis-overline">Skeletal element</div><h1>Mandible</h1></div>
-      <div class="analysis-method"><span class="analysis-overline">Methods</span><span class="analysis-method-name is-pending">Not configured</span></div>
+      <div class="analysis-method"><span class="analysis-overline">Selected method</span><span class="analysis-method-name" id="mandibleMethodName">Measurements</span></div>
     </div>
   </header>
+  <nav class="element-tabs" id="mandibleTabs" aria-label="Mandible analysis methods">
+    <button class="element-tab active" type="button" data-mandible-tab="measurements">Measurements</button>
+    <button class="element-tab" type="button" data-mandible-tab="fd">Discriminant Functions</button>
+    <button class="element-tab" type="button" data-mandible-tab="summary">Summary</button>
+  </nav>
   <div class="mandible-spaced">
     <section class="card" aria-label="Mandible specimen identification">
       <div class="secttop"><div><div class="eyebrow">Specimen</div><h2>Mandible · Identity</h2></div>
@@ -249,10 +287,7 @@
       </div>
       <p class="mandible-status" role="status" aria-live="polite" id="mandibleStatus">Records are stored separately from Femur.</p>
     </section>
-    <section class="card" aria-label="Mandible measurement methods">
-      <div class="eyebrow">Measurement protocols</div><h2>Mandible · Measurements</h2>
-      <div class="mandible-note" style="margin-top:17px"><strong>Awaiting measurement protocol</strong>Mandible measurements and sex-estimation methods will appear here once the measurement definitions and calculation rules are supplied. No femur measurements or formulas are reused in this section.</div>
-    </section>
+    <section class="card" aria-label="Mandible measurement methods"><div id="mandibleMethodBody"></div></section>
     <section class="card" aria-label="Saved mandible specimens">
       <div class="secttop"><div><div class="eyebrow">Local records</div><h2>Mandible specimens <span id="mandibleCount" style="color:var(--muted);font-size:13px;font-weight:500">(0)</span></h2></div><button id="mandibleExport" class="button tertiary" type="button">Export CSV</button></div>
       <div class="table-wrap"><table class="mandible-table"><thead><tr><th>Individual</th><th>Number</th><th>Locus</th><th>Actions</th></tr></thead><tbody id="mandibleRows"></tbody></table><div class="mandible-empty" id="mandibleEmpty">No mandible specimens saved in this context.</div></div>
@@ -397,8 +432,8 @@
 
   // Separate Mandible prototype storage; femur data and calculation logic remain untouched.
   const MANDIBLE_KEY='osteometry_mandible_v1';
-  function freshMandible(){return {individual:'',number:'',locus:''};}
-  function safeMandible(value){return {individual:String(value?.individual||''),number:String(value?.number||''),locus:String(value?.locus||'')};}
+  function freshMandible(){return {individual:'',number:'',locus:'',model:'FD1',measurements:{}};}
+  function safeMandible(value){const measurements={};for(const code of ['d','e','f','g','h','i','j','k','l']){const raw=value?.measurements?.[code];if(raw!==undefined && raw!==null)measurements[code]=String(raw);}return {individual:String(value?.individual||''),number:String(value?.number||''),locus:String(value?.locus||''),model:['FD1','FD2','FD3','FD4','FD5'].includes(value?.model)?value.model:'FD1',measurements};}
   let mandibleData=read(MANDIBLE_KEY,{version:1,recordsByContext:{},draftsByContext:{}});
   if(!mandibleData||typeof mandibleData!=='object'||typeof mandibleData.recordsByContext!=='object'||typeof mandibleData.draftsByContext!=='object')mandibleData={version:1,recordsByContext:{},draftsByContext:{}};
   let mandibleSaved=[],mandibleState=freshMandible(),mandibleSelectedId=null;
@@ -417,6 +452,7 @@
   }
   function mandibleNotice(message){$('mandibleStatus').textContent=message;}
   function renderMandible(){
+    window.osteometryExtension?.renderMandible?.();
     const body=$('mandibleRows');
     body.replaceChildren();
     $('mandibleCount').textContent='('+mandibleSaved.length+')';
@@ -454,20 +490,24 @@
     return ok;
   }
   function setElementView(element){
-    activeElement=element==='mandible'?'mandible':'femur';
+    activeElement=['femur','humerus','mandible'].includes(element)?element:'femur';
     $('femurView').hidden=activeElement!=='femur';
+    $('humerusView').hidden=activeElement!=='humerus';
     $('mandibleView').hidden=activeElement!=='mandible';
-    for(const elementName of ['femur','mandible']){
+    for(const elementName of ['femur','humerus','mandible']){
       const button=$('element'+elementName[0].toUpperCase()+elementName.slice(1));
       const selected=elementName===activeElement;
       button.classList.toggle('active',selected);
       if(selected)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');
     }
     if(activeElement==='femur')renderTab();
-    else{
+    else if(activeElement==='mandible'){
       renderMandible();
       document.title='Osteometric Analysis | '+(currentSite()?.code||'Site')+' / '+(currentContext()?.name||'Context')+' | Mandible';
+    } else {
+      document.title='Osteometric Analysis | '+(currentSite()?.code||'Site')+' / '+(currentContext()?.name||'Context')+' | Humerus';
     }
+    window.osteometryExtension?.onElementChange?.(activeElement);
     refreshContextBar();
   }
   function persistWorkspace(){
@@ -483,7 +523,7 @@
     $('contextSelect').innerHTML=contexts.map(c=>`<option value="${esc(c.id)}" ${c.id===ctx?.id?'selected':''}>${esc(c.name)}</option>`).join('');
     $('workspaceSiteName').textContent=site?.code||'Site';
     $('workspaceContextName').textContent=ctx?.name||'Context';
-    const contextRecords=activeElement==='mandible'?mandibleSaved:saved;
+    const contextRecords=activeElement==='mandible'?mandibleSaved:activeElement==='humerus'?(window.osteometryExtension?.getHumerusRecords?.()||[]):saved;
     $('contextCount').textContent=contextRecords.length+' specimen'+(contextRecords.length===1?'':'s');
     $('exampleRow').hidden=!(site?.id==='site_rmil'&&ctx?.id===DEFAULT_CONTEXT);
   }
@@ -491,6 +531,7 @@
     if(!workspaceData.contexts.some(c=>c.id===nextId)||nextId===activeContextId)return;
     closeCreationPanels();
     persistMandible();
+    window.osteometryExtension?.persistHumerus?.();
     persistWorkspace();
     activeContextId=nextId;
     loadMandibleContext();
@@ -624,6 +665,7 @@
   $('methodExtras').addEventListener('click',e=>{const button=e.target.closest('[data-matrix-model]');if(!button)return;state.kanzModel=button.dataset.matrixModel;persistDraftAndMaybeRecord();renderTab();});
 
   $('elementFemur').addEventListener('click',()=>setElementView('femur'));
+  $('elementHumerus').addEventListener('click',()=>setElementView('humerus'));
   $('elementMandible').addEventListener('click',()=>setElementView('mandible'));
   for(const field of ['individual','number','locus']){
     $('mandible'+field[0].toUpperCase()+field.slice(1)).addEventListener('input',e=>{
@@ -707,8 +749,8 @@
     toast(storageFailure?'Context created for this session, but browser storage is blocked. Use Backup all before closing.':'Context '+name+' created under '+(currentSite()?.code||'site')+'.',storageFailure);
   });
   $('backupWorkspace').addEventListener('click',()=>{
-    persistWorkspace();persistMandible();
-    const backup={type:'femur-sex-estimation-backup',version:2,exportedAt:new Date().toISOString(),workspace:workspaceData,mandible:mandibleData,referenceImages:images};
+    persistWorkspace();persistMandible();window.osteometryExtension?.persistHumerus?.();
+    const backup={type:'femur-sex-estimation-backup',version:3,exportedAt:new Date().toISOString(),workspace:workspaceData,mandible:mandibleData,humerus:window.osteometryExtension?.exportHumerus?.()||null,referenceImages:images};
     const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
     const url=URL.createObjectURL(blob);const a=document.createElement('a');
     a.href=url;a.download='sex_estimation_all_sites_backup.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
@@ -725,6 +767,7 @@
       if(payload.mandible && typeof payload.mandible.recordsByContext==='object' && typeof payload.mandible.draftsByContext==='object'){
         mandibleData=payload.mandible;put(MANDIBLE_KEY,mandibleData);
       }
+      window.osteometryExtension?.restoreHumerus?.(payload.humerus);
       saved=(w.recordsByContext[activeContextId]||[]).map(r=>({...norm(r),id:r.id||uid()}));
       state=norm(w.draftsByContext?.[activeContextId]);
       selectedId=null;
@@ -738,8 +781,16 @@
   // The draft may correspond to an auto-saved record from a previous session.
   if(hasIdentity(state)){const match=saved.find(r=>keyOf(r)===keyOf(state));if(match)selectedId=match.id;}
   for(const name of ['individual','number','locus'])$(name).value=state[name]||'';
+  window.osteometryBridge={
+    getContextId:()=>activeContextId,getContextName:()=>contextName(),getSite:()=>currentSite()?.code||'',
+    getMandibleState:()=>mandibleState,getMandibleSaved:()=>mandibleSaved,
+    persistMandible:()=>persistMandible(),saveMandible:()=>saveMandible(),
+    refreshContext:()=>refreshContextBar(),setElementView
+  };
   loadMandibleContext();refreshContextBar();renderTab();renderSaved();setElementView('femur');markSave(selectedId?'Saved automatically in this browser':'Enter Individual and Number to save automatically');
 })();
 </script>
+<link rel="stylesheet" href="./element-methods.css">
+<script src="./element-methods.js"></script>
 </body>
 </html>
