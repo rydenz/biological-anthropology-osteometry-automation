@@ -57,7 +57,7 @@
     state=normal(store.draftsByContext[context][element]);
     selected=null;
     const existing=records.find(x=>ident(x.number)===ident(state.number)&&ident(state.number));
-    if(existing){selected=existing.id;state=normal(existing);}
+    if(existing)selected=existing.id; // Keep the draft's unsaved values when revisiting this bone.
     fillForm();
   }
   function fillForm() {
