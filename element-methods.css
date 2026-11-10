@@ -1,0 +1,42 @@
+/* Additional skeletal elements: methods and shared measurements. */
+.element-tabs{display:flex;gap:6px;overflow:auto;padding:8px 0 16px;margin-top:-6px;border-bottom:1px solid var(--line-soft);scrollbar-width:thin}
+.element-tab{border:1px solid transparent;color:var(--secondary);background:transparent;padding:10px 15px;border-radius:9px;font-weight:650;font-size:12px;white-space:nowrap}
+.element-tab:hover{background:#242b36;color:var(--ink)}
+.element-tab.active{background:#23344b;color:#eaf1fb;border-color:#3f5c7b}
+.element-title-line{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.element-title-line h2{font-size:18px;letter-spacing:-.35px}
+.element-field{display:grid;grid-template-columns:minmax(0,1fr) 156px;gap:18px;align-items:center;padding:13px 14px;background:var(--panel-2);border:1px solid var(--line-soft);border-radius:10px;margin-bottom:9px}
+.element-field-title{font-size:12px;font-weight:650;color:var(--ink)}
+.element-field-code{color:var(--muted);font-size:10px;margin-top:3px}
+.element-field .control{gap:4px}
+.element-field input{height:42px;max-width:100%;font-size:15px;font-variant-numeric:tabular-nums}
+.element-field input:disabled{opacity:.65}
+.element-muted{color:var(--muted);font-size:12px;line-height:1.55}
+.element-method-note{background:#1d2734;border-left:2px solid #678ebd;border-radius:0 8px 8px 0;padding:12px 14px;font-size:12px;color:var(--secondary);line-height:1.55;margin:13px 0 18px}
+.element-method-note.warning{border-color:#c6a06c;background:#2b251d;color:#e1caa7}
+.element-method-note strong{color:var(--ink)}
+.element-result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin:14px 0}
+.element-result{padding:15px;background:var(--panel-2);border:1px solid var(--line);border-radius:10px}
+.element-result .result-caption{text-transform:uppercase;letter-spacing:.9px;color:var(--muted);font-size:10px;font-weight:740}
+.element-result strong{display:block;color:var(--ink);font-size:21px;letter-spacing:-.5px;margin-top:6px;font-variant-numeric:tabular-nums}
+.element-bass-table{width:100%;border-collapse:collapse;font-size:12px;margin:15px 0}
+.element-bass-table th{text-align:left;color:var(--muted);font-weight:700;padding:10px;border-bottom:1px solid var(--line)}
+.element-bass-table td{padding:10px;border-bottom:1px solid var(--line-soft)}
+.element-bass-table tr:last-child td{border-bottom:0}
+.element-formula{padding:11px 13px;border:1px solid var(--line-soft);background:#0e141d;border-radius:9px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px;color:#bfcee1;overflow-wrap:anywhere;line-height:1.8;margin-top:13px}
+.element-models{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
+.element-model{background:#222a36;color:var(--secondary);border:1px solid #404b5a;border-radius:9px;font-weight:700;font-size:12px;padding:9px 14px}
+.element-model:hover{color:var(--ink)}
+.element-model.active{background:#274363;color:#f1f6ff;border-color:#678ab8}
+.element-model:disabled{cursor:not-allowed;opacity:.52}
+.element-summary-table{width:100%;border-collapse:collapse;font-size:12px;min-width:540px}
+.element-summary-table th{text-align:left;color:var(--muted);font-weight:680;font-size:11px;padding:11px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.element-summary-table td{padding:11px 10px;border-bottom:1px solid var(--line-soft)}
+.element-table-scroll{max-width:100%;overflow-x:auto}
+.element-summary-table tr:last-child td{border-bottom:0}
+.element-preview-marker{display:inline-block;color:var(--muted);font-weight:500;font-size:10px;margin-left:7px}
+.element-separator{height:1px;background:var(--line-soft);margin:19px 0}
+.element-completeness{color:var(--muted);font-size:11px;white-space:nowrap}
+.element-legend{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.element-legend span{font-size:11px;color:var(--muted)}
+@media(max-width:560px){.element-field{grid-template-columns:1fr;gap:8px}.element-title-line{align-items:flex-start}.element-tabs{gap:2px}.element-tab{padding:9px 11px}}
